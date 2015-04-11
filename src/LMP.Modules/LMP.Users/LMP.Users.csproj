@@ -128,9 +128,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201504110254045_InitialCreate.cs" />
-    <Compile Include="Migrations\201504110254045_InitialCreate.Designer.cs">
-      <DependentUpon>201504110254045_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201504111432066_InitialCreate.cs" />
+    <Compile Include="Migrations\201504111432066_InitialCreate.Designer.cs">
+      <DependentUpon>201504111432066_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Data\InitialDataBuilder.cs" />
@@ -162,8 +162,8 @@
     <Folder Include="Domain\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504110254045_InitialCreate.resx">
-      <DependentUpon>201504110254045_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504111432066_InitialCreate.resx">
+      <DependentUpon>201504111432066_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

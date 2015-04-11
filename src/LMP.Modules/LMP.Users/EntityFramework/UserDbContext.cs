@@ -14,63 +14,16 @@ using LMP.Auditing;
 using LMP.Core.MultiTenancy;
 using LMP.Core.Security.Roles;
 using LMP.Core.Security.Users;
+using LMP.Core.EntityFramework;
 
 namespace LMP.Users.EntityFramework
 {
     /// <summary>
     /// DbContext for User.
     /// </summary>
-    public class UserDbContext : AbpDbContext
+    public class UserDbContext : LMPDbContext<Tenant, Role, User>
     {
-        /// <summary>
-        /// Tenants
-        /// </summary>
-        public virtual IDbSet<Tenant> Tenants { get; set; }
-
-        /// <summary>
-        /// Roles.
-        /// </summary>
-        public virtual IDbSet<Role> Roles { get; set; }
-
-        /// <summary>
-        /// Users.
-        /// </summary>
-        public virtual IDbSet<User> Users { get; set; }
-
-        /// <summary>
-        /// User logins.
-        /// </summary>
-        public virtual IDbSet<UserLogin> UserLogins { get; set; }
-
-        /// <summary>
-        /// User roles.
-        /// </summary>
-        public virtual IDbSet<UserRole> UserRoles { get; set; }
-
-        /// <summary>
-        /// Permissions.
-        /// </summary>
-        public virtual IDbSet<PermissionSetting> Permissions { get; set; }
-
-        /// <summary>
-        /// Role permissions.
-        /// </summary>
-        public virtual IDbSet<RolePermissionSetting> RolePermissions { get; set; }
-        
-        /// <summary>
-        /// User permissions.
-        /// </summary>
-        public virtual IDbSet<UserPermissionSetting> UserPermissions { get; set; }
-
-        /// <summary>
-        /// Settings.
-        /// </summary>
-        public virtual IDbSet<Setting> Settings { get; set; }
-
-        /// <summary>
-        /// Audit logs.
-        /// </summary>
-        public virtual IDbSet<AuditLog> AuditLogs { get; set; }
+        //TODO: Define an IDbSet for each Entity...
 
         public UserDbContext()
             : base("Default")

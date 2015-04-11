@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using LMP.Data.MySql;
 using System.Data.Entity.Migrations;
 using LMP.QuestionSystem.Migrations.Data;
 using LMP.QuestionSystem.EntityFramework;
+using LMP.Core.Data.MySql;
 
 namespace LMP.QuestionSystem.Migrations
 {

@@ -1,10 +1,10 @@
-using LMP.Data.MySql;
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using LMP.Users.EntityFramework;
 using LMP.Users.Migrations.Data;
+using LMP.Core.Data.MySql;
 
 namespace LMP.Users.Migrations
 {

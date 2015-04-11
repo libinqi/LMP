@@ -1,11 +1,15 @@
 ﻿using Abp.EntityFramework;
+using LMP.Core.EntityFramework;
+using LMP.Core.MultiTenancy;
+using LMP.Core.Security.Roles;
+using LMP.Core.Security.Users;
 using LMP.TaskSystem.Domain;
 using System.Data.Common;
 using System.Data.Entity;
 
 namespace LMP.TaskSystem.EntityFramework
 {
-    public class TaskSystemDbContext : AbpDbContext
+    public class TaskSystemDbContext : LMPDbContext<Tenant, Role, User>
     {
         //TODO: Define an IDbSet for each Entity...
 

@@ -142,9 +142,9 @@
     <Compile Include="Domain\Task\ITaskRepository.cs" />
     <Compile Include="Domain\Task\Task.cs" />
     <Compile Include="Domain\Task\TaskState.cs" />
-    <Compile Include="Migrations\201504110254386_InitialCreate.cs" />
-    <Compile Include="Migrations\201504110254386_InitialCreate.Designer.cs">
-      <DependentUpon>201504110254386_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201504111432512_InitialCreate.cs" />
+    <Compile Include="Migrations\201504111432512_InitialCreate.Designer.cs">
+      <DependentUpon>201504111432512_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Data\InitialDataBuilder.cs" />
@@ -178,8 +178,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504110254386_InitialCreate.resx">
-      <DependentUpon>201504110254386_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504111432512_InitialCreate.resx">
+      <DependentUpon>201504111432512_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

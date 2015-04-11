@@ -124,6 +124,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\MySql\MySqlHistoryContext.cs" />
+    <Compile Include="EntityFramework\LMPDbContext.cs" />
     <Compile Include="MultiTenancy\Tenant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\Permissions\PermissionChecker.cs" />

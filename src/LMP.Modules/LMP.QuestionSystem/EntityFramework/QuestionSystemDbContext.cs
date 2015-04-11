@@ -1,11 +1,15 @@
 ﻿using Abp.EntityFramework;
+using LMP.Core.EntityFramework;
+using LMP.Core.MultiTenancy;
+using LMP.Core.Security.Roles;
+using LMP.Core.Security.Users;
 using LMP.QuestionSystem.Domain.Questions;
 using System.Data.Common;
 using System.Data.Entity;
 
 namespace LMP.QuestionSystem.EntityFramework
 {
-    public class QuestionSystemDbContext : AbpDbContext
+    public class QuestionSystemDbContext : LMPDbContext<Tenant, Role, User>
     {
         //TODO: Define an IDbSet for each Entity...
 

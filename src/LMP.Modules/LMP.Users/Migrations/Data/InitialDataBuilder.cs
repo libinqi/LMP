@@ -37,9 +37,9 @@ namespace LMP.Users.Migrations.Data
                     {
                         TenantId = null,
                         UserName = "admin",
-                        Name = "System",
+                        Name = "admin",
                         Surname = "Administrator",
-                        EmailAddress = "admin@aspnetboilerplate.com",
+                        EmailAddress = "admin@admin.com",
                         IsEmailConfirmed = true,
                         Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" //123qwe
                     });
@@ -67,11 +67,6 @@ namespace LMP.Users.Migrations.Data
             {
                 adminRoleForDefaultTenant = context.Roles.Add(new Role(defaultTenant.Id, "Admin", "Admin"));
                 context.SaveChanges();
-
-                //Permission definitions for Admin of 'Default' tenant
-                context.Permissions.Add(new RolePermissionSetting { RoleId = adminRoleForDefaultTenant.Id, Name = "CanDeleteAnswers", IsGranted = true });
-                context.Permissions.Add(new RolePermissionSetting { RoleId = adminRoleForDefaultTenant.Id, Name = "CanDeleteQuestions", IsGranted = true });
-                context.SaveChanges();
             }
 
             //User role for 'Default' tenant
@@ -80,10 +75,6 @@ namespace LMP.Users.Migrations.Data
             if (userRoleForDefaultTenant == null)
             {
                 userRoleForDefaultTenant = context.Roles.Add(new Role(defaultTenant.Id, "User", "User"));
-                context.SaveChanges();
-
-                //Permission definitions for User of 'Default' tenant
-                context.Permissions.Add(new RolePermissionSetting { RoleId = userRoleForDefaultTenant.Id, Name = "CanCreateQuestions", IsGranted = true });
                 context.SaveChanges();
             }
 
@@ -97,9 +88,9 @@ namespace LMP.Users.Migrations.Data
                     {
                         TenantId = defaultTenant.Id,
                         UserName = "admin",
-                        Name = "System",
+                        Name = "admin",
                         Surname = "Administrator",
-                        EmailAddress = "admin@aspnetboilerplate.com",
+                        EmailAddress = "admin@admin.com",
                         IsEmailConfirmed = true,
                         Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" //123qwe
                     });

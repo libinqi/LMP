@@ -12,7 +12,7 @@ using LMP.Authorization;
 using LMP.Configuration;
 using LMP.Auditing;
 
-namespace Abp.Zero.EntityFramework
+namespace LMP.Core.EntityFramework
 {
     /// <summary>
     /// DbContext for LMP Core.
