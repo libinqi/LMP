@@ -1,0 +1,39 @@
+﻿<div ng-controller="app.views.task.list as vm">
+    <div class="command-list row">
+        <div class="col-lg-12 text-right">
+            <button ng-click="vm.newTask()" class="btn btn-primary btn-raised"><i class="fa fa-asterisk"></i> {{vm.localize('NewTask')}}</button>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" style="position: relative;">
+            <div class="row">
+
+                <!-- Title -->
+                <h3 class="panel-title col-xs-6">
+                    {{vm.localize('TaskList')}} - <span>{{vm.getTaskCountText()}}</span>
+                </h3>
+
+                <!-- Task state combobox -->
+                <div class="col-xs-6 text-right">
+                    <select ng-model="selectedTaskState">
+                        <option value="0">{{vm.localize('AllTasks')}}</option>
+                        <option value="1">{{vm.localize('ActiveTasks')}}</option>
+                        <option value="2">{{vm.localize('CompletedTasks')}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- Task list -->
+        <ul class="list-group" ng-repeat="task in vm.tasks">
+            <div class="list-group-item">
+                <span class="task-state-icon glyphicon" ng-click="vm.changeTaskState(task)" ng-class="{'glyphicon-minus': task.state == 1, 'glyphicon-ok': task.state == 2}"></span>
+                <span ng-class="{'task-description-active': task.state == 1, 'task-description-completed': task.state == 2 }">{{task.description}}</span>
+                <br />
+                <span ng-show="task.creatorUserId">
+                    <span class="task-assignedto">{{task.creatorUserName}}</span>
+                </span>
+                <span class="task-creationtime">{{task.creationTime | fromNow}}</span>
+            </div>
+        </ul>
+    </div>
+</div>

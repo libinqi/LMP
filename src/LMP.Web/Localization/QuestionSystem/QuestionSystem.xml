@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="en">
+  <texts>
+    <text name="Questions" value="Questions" />
+    <text name="New" value="New question" />
+    <text name="More" value="SHOW MORE" />
+    <text name="Sort" value="Sort by" />
+    <text name="CreationTime DESC" value="CreationTime DESC" />
+    <text name="VoteCount DESC" value="VoteCount DESC" />
+    <text name="ViewCount DESC" value="ViewCount DESC" />
+    <text name="AnswerCount DESC" value="AnswerCount DESC" />   
+    <text name="QuestionPage" value="Showing {0} of total {1} questions" />
+    <text name="Title" value="Title" />
+    <text name="Text" value="Text" />    
+    <text name="TitleDescription" value="Enter title here" />
+    <text name="EnterDescriptionHere" value="Describe your question here" />
+    <text name="TextRemark" value="Please search your question before creating new one. You can add code snippets and images to describe your problem cleaner." />
+    <text name="Cancel" value="Cancel" />
+    <text name="Submit" value="Submit question" />
+    <text name="CreateTitle" value="Create new question!" />
+    <text name="Votes" value="votes" />
+    <text name="Answers" value="answers" />
+    <text name="Views" value="views" />   
+    <text name="AnswerTitle" value="Answer to the question" />
+    <text name="SubmitAnswer" value="Submit answer" />
+    <text name="Accepted" value="Set as accepted answer" />    
+    <text name="IsAccepted" value="This answer is accepted by question owner" />    
+  </texts>
+</localizationDictionary>

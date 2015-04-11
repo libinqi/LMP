@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="zh-cn">
+  <texts>
+    <text name="Questions" value="提问" />
+    <text name="New" value="新建问题" />
+    <text name="More" value="查看更多" />
+    <text name="Sort" value="排序" />
+    <text name="CreationTime DESC" value="按创建时间降序" />
+    <text name="VoteCount DESC" value="按关注度降序" />
+    <text name="ViewCount DESC" value="按浏览量降序" />
+    <text name="AnswerCount DESC" value="按回复数降序" />
+    <text name="QuestionPage" value="显示第 {0} 个 总共 {1} 个问题" />
+    <text name="Title" value="标题" />
+    <text name="Text" value="内容" />
+    <text name="TitleDescription" value="请输入标题" />
+    <text name="EnterDescriptionHere" value="输入您要提交的问题内容" />
+    <text name="TextRemark" value="请在提交新的问题之前搜索一下相关的问题. 您可以提交代码片段或截图，这样可以让你的问题描述的更清晰." />
+    <text name="Cancel" value="取消" />
+    <text name="Submit" value="提交问题" />
+    <text name="CreateTitle" value="创建一个新的问题!" />
+    <text name="Votes" value="赞" />
+    <text name="Answers" value="回答" />
+    <text name="Views" value="查看" />
+    <text name="AnswerTitle" value="回答这个问题" />
+    <text name="SubmitAnswer" value="提交" />
+    <text name="Accepted" value="接受这个回答" />
+    <text name="IsAccepted" value="这个回答已被提问者采纳" />
+  </texts>
+</localizationDictionary>

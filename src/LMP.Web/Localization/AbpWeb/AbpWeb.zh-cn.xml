@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="zh-cn">
+  <texts>
+    <text name="InternalServerError" value="您的请求发生了一个内部错误!" />
+    <text name="ValidationError" value="您的请求无效!" />
+    <text name="AreYouSure" value="您确定?" />
+    <text name="Cancel" value="取消" />
+    <text name="Yes" value="确定" />
+    <text name="Login" value="用户登录" />
+    <text name="Logout" value="退出" />
+    <text name="UserName" value="用户名或者邮箱" />
+    <text name="Password" value="密码" />
+    <text name="Remember" value="记住密码" />
+    <text name="LoginBtn" value="登录" />
+  </texts>
+</localizationDictionary>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Abp.FluentMigrator</name>
+    </assembly>
+    <members>
+        <member name="T:Abp.FluentMigrator.Extensions.AbpFluentMigratorExtensions">
+            <summary>
+            This class is an extension for migration system to make easier to some common tasks.
+            </summary>
+        </member>
+        <member name="M:Abp.FluentMigrator.Extensions.AbpFluentMigratorExtensions.WithIdAsInt32(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds an auto increment <see cref="T:System.Int32"/> primary key to the table.
+            </summary>
+        </member>
+        <member name="M:Abp.FluentMigrator.Extensions.AbpFluentMigratorExtensions.WithIdAsInt64(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds an auto increment <see cref="T:System.Int64"/> primary key to the table.
+            </summary>
+        </member>
+        <member name="M:Abp.FluentMigrator.Extensions.AbpFluentMigratorExtensions.WithIsDeletedColumn(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds IsDeleted column to the table. See <see cref="T:Abp.Domain.Entities.ISoftDelete"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.FluentMigrator.Extensions.AbpFluentMigratorExtensions.AddIsDeletedColumn(FluentMigrator.Builders.Alter.Table.IAlterTableAddColumnOrAlterColumnSyntax)">
+            <summary>
+            Adds IsDeleted column to the table. See <see cref="T:Abp.Domain.Entities.ISoftDelete"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.FluentMigrator.Extensions.AbpFluentMigratorExtensions.WithCreationTimeColumn(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Ads CreationTime field to the table for <see cref="T:Abp.Domain.Entities.Auditing.IHasCreationTime"/> interface.
+            </summary>
+        </member>
+        <member name="M:Abp.FluentMigrator.Extensions.AbpFluentMigratorExtensions.AddCreationTimeColumn(FluentMigrator.Builders.Alter.Table.IAlterTableAddColumnOrAlterColumnSyntax)">
+            <summary>
+            Adds creation auditing columns to a table. See <see cref="T:Abp.Domain.Entities.Auditing.ICreationAudited"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.FluentMigrator.Extensions.AbpFluentMigratorExtensions.WithIsSuspendedColumn(FluentMigrator.Builders.Create.Table.ICreateTableWithColumnSyntax)">
+            <summary>
+            Adds IsDeleted column to the table. See <see cref="T:Abp.Domain.Entities.IPassivable"/>.
+            </summary>
+        </member>
+        <member name="M:Abp.FluentMigrator.Extensions.AbpFluentMigratorExtensions.AddIsSuspendedColumn(FluentMigrator.Builders.Alter.Table.IAlterTableAddColumnOrAlterColumnSyntax)">
+            <summary>
+            Adds IsDeleted column to the table. See <see cref="T:Abp.Domain.Entities.IPassivable"/>.
+            </summary>
+        </member>
+    </members>
+</doc>
