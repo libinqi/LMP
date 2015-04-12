@@ -3,6 +3,7 @@ using System.Linq;
 using LMP.TaskSystem.Domain;
 using LMP.TaskSystem;
 using LMP.TaskSystem.EntityFramework;
+using LMP.Core.Security.Users;
 
 namespace LMP.TaskSystem.Tests.InitialData
 {
@@ -10,44 +11,43 @@ namespace LMP.TaskSystem.Tests.InitialData
     {
         public void Build(TaskSystemDbContext context)
         {
-            //Add some people
-            
-            //context.Users.AddOrUpdate(
-            //    p => p.Name,
-            //    new Person {Name = "Isaac Asimov"},
-            //    new Person {Name = "Thomas More"},
-            //    new Person {Name = "George Orwell"},
-            //    new Person {Name = "Douglas Adams"}
-            //    );
+            //添加一些用户
 
-            //context.SaveChanges();
+            context.Users.AddOrUpdate(
+                p => p.Name,
+                new User { Name = "hezhiwei" },
+                new User { Name = "deweifan" },
+                new User { Name = "libinqi" }
+                );
 
-            ////Add some tasks
+            context.SaveChanges();
 
-            //context.Tasks.AddOrUpdate(
-            //    t => t.Description,
-            //    new Task
-            //    {
-            //        Description = "my initial task 1"
-            //    },
-            //    new Task
-            //    {
-            //        Description = "my initial task 2",
-            //        State = TaskState.Completed
-            //    },
-            //    new Task
-            //    {
-            //        Description = "my initial task 3",
-            //        AssignedPerson = context.People.Single(p => p.Name == "Douglas Adams")
-            //    },
-            //    new Task
-            //    {
-            //        Description = "my initial task 4",
-            //        AssignedPerson = context.People.Single(p => p.Name == "Isaac Asimov"),
-            //        State = TaskState.Completed
-            //    });
+            //添加一些任务
 
-            //context.SaveChanges();
+            context.Tasks.AddOrUpdate(
+                t => t.Description,
+                new Task
+                {
+                    Description = "my initial task 1"
+                },
+                new Task
+                {
+                    Description = "my initial task 2",
+                    State = TaskState.Completed
+                },
+                new Task
+                {
+                    Description = "my initial task 3",
+                    CreatorUser = context.Users.Single(p => p.Name == "hezhiwei")
+                },
+                new Task
+                {
+                    Description = "my initial task 4",
+                    CreatorUser = context.Users.Single(p => p.Name == "deweifan"),
+                    State = TaskState.Completed
+                });
+
+            context.SaveChanges();
         }
     }
 }
