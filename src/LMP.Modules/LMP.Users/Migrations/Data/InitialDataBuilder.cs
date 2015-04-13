@@ -19,7 +19,6 @@ namespace LMP.Users.Migrations.Data
         private void CreateUserAndRoles(UserDbContext context)
         {
             //Admin role for tenancy owner
-
             var adminRoleForTenancyOwner = context.Roles.FirstOrDefault(r => r.TenantId == null && r.Name == "Admin");
             if (adminRoleForTenancyOwner == null)
             {

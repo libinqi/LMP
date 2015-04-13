@@ -6,6 +6,8 @@ using LMP.Core.Security.Users;
 using LMP.QuestionSystem.Domain.Questions;
 using LMP.QuestionSystem.EntityFramework;
 using System.Linq;
+using System.Linq.Dynamic;
+using EntityFramework.DynamicFilters;
 
 namespace LMP.QuestionSystem.Migrations.Data
 {
@@ -18,38 +20,6 @@ namespace LMP.QuestionSystem.Migrations.Data
 
         private void CreateQuestions(QuestionSystemDbContext context)
         {
-
-            var adminRoleForTenancyOwner = context.Roles.FirstOrDefault(r => r.TenantId == null && r.Name == "Admin");
-            if (adminRoleForTenancyOwner == null)
-            {
-                adminRoleForTenancyOwner = context.Roles.Add(new Role(null, "Admin", "Admin"));
-                context.SaveChanges();
-            }
-
-            //Admin user for tenancy owner
-
-            var adminUserForTenancyOwner = context.Users.FirstOrDefault(u => u.TenantId == null && u.UserName == "admin");
-            if (adminUserForTenancyOwner == null)
-            {
-                adminUserForTenancyOwner = context.Users.Add(
-                    new User
-                    {
-                        TenantId = null,
-                        UserName = "admin",
-                        Name = "admin",
-                        Surname = "Administrator",
-                        EmailAddress = "admin@admin.com",
-                        IsEmailConfirmed = true,
-                        Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" //123qwe
-                    });
-
-                context.SaveChanges();
-
-                context.UserRoles.Add(new UserRole(adminUserForTenancyOwner.Id, adminRoleForTenancyOwner.Id));
-
-                context.SaveChanges();
-            }
-
             //Default tenant
 
             var defaultTenant = context.Tenants.FirstOrDefault(t => t.TenancyName == "Default");
@@ -133,6 +103,10 @@ namespace LMP.QuestionSystem.Migrations.Data
             }
             else
             {
+                context.UserRoles.Add(new UserRole(adminUserForDefaultTenant.Id, adminRoleForDefaultTenant.Id));
+                context.UserRoles.Add(new UserRole(adminUserForDefaultTenant.Id, userRoleForDefaultTenant.Id));
+                context.SaveChanges();
+
                 var question1 = context.Questions.Add(
                 new Question(
                     "生命、宇宙和一切的终极问题的答案是什么?",

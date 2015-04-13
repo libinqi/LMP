@@ -22,6 +22,8 @@ namespace LMP.QuestionSystem.Migrations
 
         protected override void Seed(QuestionSystemDbContext context)
         {
+            //if (System.Diagnostics.Debugger.IsAttached == false)
+            //    System.Diagnostics.Debugger.Launch();
             new InitialDataBuilder().Build(context);
         }
     }

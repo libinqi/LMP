@@ -17,6 +17,9 @@ using LMP.QuestionSystem.Services.Dtos;
 using LMP.QuestionSystem.Domain.Questions;
 using LMP.Core.Security.Users;
 using LMP.QuestionSystem.Configuration;
+using LMP.QuestionSystem.Migrations.Data;
+using Abp.EntityFramework;
+using LMP.QuestionSystem.EntityFramework;
 
 namespace LMP.QuestionSystem.Services
 {
