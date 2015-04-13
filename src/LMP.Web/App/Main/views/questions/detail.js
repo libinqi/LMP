@@ -16,7 +16,7 @@
                     id: vm.question.id
                 }).success(function (data) {
                     vm.question.voteCount = data.voteCount;
-                    abp.notify.info("Saved your vote. Thanks.");
+                    abp.notify.info(vm.localize('Saved_Tip'));
                 });
             };
 
@@ -25,7 +25,7 @@
                     id: vm.question.id
                 }).success(function (data) {
                     vm.question.voteCount = data.voteCount;
-                    abp.notify.info("Saved your vote. Thanks.");
+                    abp.notify.info(vm.localize('Saved_Tip'));
                 });
             };
 
@@ -43,7 +43,7 @@
                 questionService.acceptAnswer({
                     id: answer.id
                 }).success(function () {
-                    abp.notify.info("You accepted the answer by " + answer.creatorUserName);
+                    abp.notify.info(vm.localize('Accepted_Tip') + answer.creatorUserName);
                     loadQuestion();
                 });
             };
