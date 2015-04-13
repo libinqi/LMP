@@ -25,5 +25,8 @@
     <text name="SubmitAnswer" value="Submit answer" />
     <text name="Accepted" value="Set as accepted answer" />    
     <text name="IsAccepted" value="This answer is accepted by question owner" />    
+    <text name="Accepted" value="Set as accepted answer" />
+    <text name="Saved_Tip" value="Saved your vote. Thanks" />
+    <text name="Accepted_Tip" value="You accepted the answer by " />
   </texts>
 </localizationDictionary>

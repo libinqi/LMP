@@ -25,5 +25,7 @@
     <text name="SubmitAnswer" value="提交" />
     <text name="Accepted" value="接受这个回答" />
     <text name="IsAccepted" value="这个回答已被提问者采纳" />
+    <text name="Saved_Tip" value="点赞成功，谢谢！" />
+    <text name="Accepted_Tip" value="您接受了回答，回答者 " />
   </texts>
 </localizationDictionary>
