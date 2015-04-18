@@ -590,6 +590,7 @@
     <Content Include="Scripts\angular-ui\ui-utils-ieshiv.min.js" />
     <Content Include="Scripts\angular-ui\ui-utils.js" />
     <Content Include="Scripts\angular-ui\ui-utils.min.js" />
+    <None Include="Scripts\angular.intellisense.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1556,6 +1557,7 @@
     <Content Include="Scripts\sweetalert\sweet-alert.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
