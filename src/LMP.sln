@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMP.QuestionSystem", "LMP.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMP.TaskSystem", "LMP.Modules\LMP.TaskSystem\LMP.TaskSystem.csproj", "{196D2675-975D-40E1-851E-D638FFEC6F72}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C2CCADBE-AFD6-4665-BD25-33C84DF9EF8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,9 +71,7 @@ Global
 		{49AB7FA6-A2F7-4F93-A83C-1E34746533C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49AB7FA6-A2F7-4F93-A83C-1E34746533C4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{196D2675-975D-40E1-851E-D638FFEC6F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{196D2675-975D-40E1-851E-D638FFEC6F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{196D2675-975D-40E1-851E-D638FFEC6F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{196D2675-975D-40E1-851E-D638FFEC6F72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

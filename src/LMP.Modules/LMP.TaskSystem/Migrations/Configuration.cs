@@ -5,7 +5,7 @@ using LMP.TaskSystem.Migrations.Data;
 using LMP.TaskSystem.EntityFramework;
 using LMP.Core.Data.MySql;
 
-namespace LMP.QuestionSystem.Migrations
+namespace LMP.TaskSystem.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<TaskSystemDbContext>
     {
