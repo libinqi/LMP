@@ -1,14 +1,14 @@
+using LMP.FileSystems.VirtualPath;
+using LMP.Module.Environment.Extensions.Loaders;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
-using Orchard.Environment.Extensions.Loaders;
-using Orchard.FileSystems.VirtualPath;
-using Orchard.Logging;
 
-namespace Orchard.FileSystems.Dependencies {
+namespace LMP.FileSystems.Dependencies
+{
     /// <summary>
     /// The purpose of this virtual path provider is to add file dependencies to .csproj files
     /// served from the "~/Modules" or "~/Themes" directory.
@@ -18,14 +18,11 @@ namespace Orchard.FileSystems.Dependencies {
 
         public DynamicModuleVirtualPathProvider(IExtensionDependenciesManager extensionDependenciesManager) {
             _extensionDependenciesManager = extensionDependenciesManager;
-            Logger = NullLogger.Instance;
         }
-
-        public ILogger Logger { get; set; }
 
         public override string GetFileHash(string virtualPath, IEnumerable virtualPathDependencies) {
             var result = GetFileHashWorker(virtualPath, virtualPathDependencies);
-            Logger.Debug("GetFileHash(\"{0}\"): {1}", virtualPath, result);
+            //Logger.Debug("GetFileHash(\"{0}\"): {1}", virtualPath, result);
             return result;
         }
 

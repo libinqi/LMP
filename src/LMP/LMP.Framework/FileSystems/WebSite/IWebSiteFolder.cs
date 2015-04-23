@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using LMP.Caching;
+using System.Collections.Generic;
 using System.IO;
-using Orchard.Caching;
 
-namespace Orchard.FileSystems.WebSite {
+namespace LMP.FileSystems.WebSite {
     /// <summary>
     /// Abstraction over the virtual files/directories of a web site.
     /// </summary>

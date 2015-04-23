@@ -1,12 +1,13 @@
-﻿using System;
+﻿using LMP.Caching;
+using LMP.FileSystems.AppData;
+using LMP.Module.Environment.Extensions.Loaders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Orchard.Caching;
-using Orchard.FileSystems.AppData;
-using Orchard.Logging;
 
-namespace Orchard.FileSystems.Dependencies {
+namespace LMP.FileSystems.Dependencies
+{
     /// <summary>
     /// Similar to "Dependencies.xml" file, except we also store "GetFileHash" result for every 
     /// VirtualPath entry. This is so that if any virtual path reference in the file changes,
@@ -23,11 +24,8 @@ namespace Orchard.FileSystems.Dependencies {
             _cacheManager = cacheManager;
             _appDataFolder = appDataFolder;
             _writeThroughToken = new InvalidationToken();
-
-            Logger = NullLogger.Instance;
         }
 
-        public ILogger Logger { get; set; }
         public bool DisableMonitoring { get; set; }
 
         private string PersistencePath {
@@ -35,18 +33,18 @@ namespace Orchard.FileSystems.Dependencies {
         }
 
         public void StoreDependencies(IEnumerable<DependencyDescriptor> dependencyDescriptors, Func<DependencyDescriptor, string> fileHashProvider) {
-            Logger.Information("Storing module dependency file.");
+            //Logger.Information("Storing module dependency file.");
 
             var newDocument = CreateDocument(dependencyDescriptors, fileHashProvider);
             var previousDocument = ReadDocument(PersistencePath);
             if (XNode.DeepEquals(newDocument.Root, previousDocument.Root)) {
-                Logger.Debug("Existing document is identical to new one. Skipping save.");
+                //Logger.Debug("Existing document is identical to new one. Skipping save.");
             }
             else {
                 WriteDocument(PersistencePath, newDocument);
             }
 
-            Logger.Information("Done storing module dependency file.");
+            //Logger.Information("Done storing module dependency file.");
         }
 
         public IEnumerable<string> GetVirtualPathDependencies(string extensionId) {
@@ -136,7 +134,7 @@ namespace Orchard.FileSystems.Dependencies {
                 }
             }
             catch (Exception e) {
-                Logger.Information(e, "Error reading file '{0}'. Assuming empty.", persistancePath);
+                //Logger.Information(e, "Error reading file '{0}'. Assuming empty.", persistancePath);
                 return new XDocument();
             }
         }

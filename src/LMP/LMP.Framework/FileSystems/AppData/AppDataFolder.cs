@@ -1,12 +1,10 @@
-﻿using System;
+﻿using LMP.Caching;
+using LMP.FileSystems.VirtualPath;
+using LMP.Validation;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Orchard.Caching;
-using Orchard.FileSystems.VirtualPath;
-using Orchard.Localization;
-using Orchard.Logging;
-using Orchard.Validation;
 
 namespace LMP.FileSystems.AppData {
     public class AppDataFolder : IAppDataFolder {
@@ -16,12 +14,7 @@ namespace LMP.FileSystems.AppData {
         public AppDataFolder(IAppDataFolderRoot root, IVirtualPathMonitor virtualPathMonitor) {
             _root = root;
             _virtualPathMonitor = virtualPathMonitor;
-            T = NullLocalizer.Instance;
-            Logger = NullLogger.Instance;
         }
-
-        public Localizer T { get; set; }
-        public ILogger Logger { get; set; }
 
         public string RootFolder {
             get {
@@ -49,7 +42,7 @@ namespace LMP.FileSystems.AppData {
             }
 
             if (isDirectory && Directory.Exists(destinationFileName)) {
-                Logger.Warning("Could not delete recipe execution folder {0} under \"App_Data\" folder", destinationFileName);
+                //Logger.Warning("Could not delete recipe execution folder {0} under \"App_Data\" folder", destinationFileName);
                 return;
             }
             // If destination doesn't exist, we are good
@@ -79,7 +72,8 @@ namespace LMP.FileSystems.AppData {
                 File.Delete(destinationFileName);
             }
             catch (Exception e) {
-                throw new OrchardCoreException(T("Unable to make room for file \"{0}\" in \"App_Data\" folder", destinationFileName), e);
+                //throw new OrchardCoreException(T("Unable to make room for file \"{0}\" in \"App_Data\" folder", destinationFileName), e);
+                throw e;
             }
         }
 
@@ -134,7 +128,7 @@ namespace LMP.FileSystems.AppData {
         }
 
         public void StoreFile(string sourceFileName, string destinationPath) {
-            Logger.Information("Storing file \"{0}\" as \"{1}\" in \"App_Data\" folder", sourceFileName, destinationPath);
+            //Logger.Information("Storing file \"{0}\" as \"{1}\" in \"App_Data\" folder", sourceFileName, destinationPath);
 
             var destinationFileName = CombineToPhysicalPath(destinationPath);
             MakeDestinationFileNameAvailable(destinationFileName);
@@ -142,7 +136,7 @@ namespace LMP.FileSystems.AppData {
         }
 
         public void DeleteFile(string path) {
-            Logger.Information("Deleting file \"{0}\" from \"App_Data\" folder", path);
+            //Logger.Information("Deleting file \"{0}\" from \"App_Data\" folder", path);
             MakeDestinationFileNameAvailable(CombineToPhysicalPath(path));
         }
 

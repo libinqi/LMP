@@ -1,6 +1,17 @@
 ﻿using System.Reflection;
 using Abp.Modules;
 using LMP.Module.Configuration;
+using LMP.Module.Environment.Extensions.Compilers;
+using LMP.Module.Environment.Extensions.Folders;
+using LMP.FileSystems.Dependencies;
+using LMP.Module.Environment.Extensions;
+using LMP.Module.Environment.Extensions.Loaders;
+using LMP.Module.Environment;
+using LMP.FileSystems.AppData;
+using LMP.FileSystems.VirtualPath;
+using LMP.FileSystems.WebSite;
+using LMP.Caching;
+using Castle.MicroKernel.Registration;
 
 namespace LMP.Module
 {
@@ -19,6 +30,53 @@ namespace LMP.Module
             IocManager.Register<IUserManagementConfig, UserManagementConfig>();
             IocManager.Register<IRoleManagementConfig, RoleManagementConfig>();
             IocManager.Register<ILMPModuleConfig, LMPModuleConfig>();
+
+
+            IocManager.Register<IAsyncTokenProvider, DefaultAsyncTokenProvider>();
+            IocManager.Register<ICacheContextAccessor, DefaultCacheContextAccessor>();
+            IocManager.Register<ICacheHolder, DefaultCacheHolder>();
+            //IocManager.Register<ICacheManager, DefaultCacheManager>();
+            IocManager.Register<IParallelCacheContext, DefaultParallelCacheContext>();
+            //IocManager.Register<IVolatileProvider, DefaultVirtualPathProvider>();
+            IocManager.Register<IVolatileToken, LMP.Caching.Signals.Token>();
+
+
+            IocManager.Register<IAppDataFolder, AppDataFolder>();
+            IocManager.Register<IAppDataFolderRoot, AppDataFolderRoot>();
+            IocManager.Register<IAssemblyProbingFolder, DefaultAssemblyProbingFolder>();
+            IocManager.Register<IExtensionDependenciesManager, DefaultExtensionDependenciesManager>();
+            IocManager.Register<ICustomVirtualPathProvider, DynamicModuleVirtualPathProvider>();
+            IocManager.Register<IVirtualPathMonitor, DefaultVirtualPathMonitor>();
+            IocManager.Register<IVirtualPathProvider, DefaultVirtualPathProvider>();
+            IocManager.Register<IWebSiteFolder, WebSiteFolder>();
+
+
+            IocManager.Register<IProjectFileParser, DefaultProjectFileParser>();
+            IocManager.Register<IExtensionHarvester, ExtensionHarvester>();
+            IocManager.Register<IDependenciesFolder, DefaultDependenciesFolder>();
+            IocManager.Register<ICriticalErrorProvider, DefaultCriticalErrorProvider>();
+
+            IocManager.IocContainer.Register(
+                //Component.For<IExtensionFolders, ModuleFolders>().ImplementedBy<ModuleFolders>().LifestyleSingleton().DependsOn(Dependency.OnValue("paths", "~/LMP.Modules")),
+                Component.For<ICacheManager, DefaultCacheManager>().ImplementedBy<DefaultCacheManager>().LifestyleSingleton().DependsOn(Dependency.OnValue("component", typeof(string)))
+            );
+
+            IocManager.Register<IExtensionFolders, ModuleFolders>();
+
+            IocManager.Register<IExtensionLoader, CoreExtensionLoader>();
+            IocManager.Register<IExtensionLoader, ReferencedExtensionLoader>();
+            IocManager.Register<IExtensionLoader, PrecompiledExtensionLoader>();
+            IocManager.Register<IExtensionLoader, DynamicExtensionLoader>();
+
+            IocManager.Register<IAssemblyLoader, DefaultAssemblyLoader>();
+            IocManager.Register<IAssemblyNameResolver, AppDomainAssemblyNameResolver>();
+            IocManager.Register<IBuildManager, DefaultBuildManager>();
+            IocManager.Register<IHostEnvironment, HostEnvironment>();
+            IocManager.Register<IExtensionManager, ExtensionManager>();
+
+            IocManager.Register<IExtensionLoaderCoordinator, ExtensionLoaderCoordinator>();
+            IocManager.Register<IExtensionMonitoringCoordinator, ExtensionMonitoringCoordinator>();
+
         }
 
         public override void Initialize()

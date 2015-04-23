@@ -1,10 +1,10 @@
-﻿using System;
+﻿using LMP.FileSystems.AppData;
+using LMP.Module.Environment;
+using System;
 using System.Reflection;
-using Orchard.Environment;
-using Orchard.FileSystems.AppData;
-using Orchard.Logging;
 
-namespace Orchard.FileSystems.Dependencies {
+namespace LMP.FileSystems.Dependencies
+{
     public class DefaultAssemblyProbingFolder : IAssemblyProbingFolder {
         private const string BasePath = "Dependencies";
         private readonly IAppDataFolder _appDataFolder;
@@ -13,11 +13,7 @@ namespace Orchard.FileSystems.Dependencies {
         public DefaultAssemblyProbingFolder(IAppDataFolder appDataFolder, IAssemblyLoader assemblyLoader) {
             _appDataFolder = appDataFolder;
             _assemblyLoader = assemblyLoader;
-
-            Logger = NullLogger.Instance;
         }
-
-        public ILogger Logger { get; set; }
 
         public bool AssemblyExists(string moduleName) {
             var path = PrecompiledAssemblyPath(moduleName);
@@ -49,7 +45,7 @@ namespace Orchard.FileSystems.Dependencies {
             var path = PrecompiledAssemblyPath(moduleName);
 
             if (_appDataFolder.FileExists(path)) {
-                Logger.Information("Deleting assembly for module \"{0}\" from probing directory", moduleName);
+                //Logger.Information("Deleting assembly for module \"{0}\" from probing directory", moduleName);
                 _appDataFolder.DeleteFile(path);
             }
         }
@@ -57,7 +53,7 @@ namespace Orchard.FileSystems.Dependencies {
         public void StoreAssembly(string moduleName, string fileName) {
             var path = PrecompiledAssemblyPath(moduleName);
 
-            Logger.Information("Storing assembly file \"{0}\" for module \"{1}\"", fileName, moduleName);
+            //Logger.Information("Storing assembly file \"{0}\" for module \"{1}\"", fileName, moduleName);
             _appDataFolder.StoreFile(fileName, path);
         }
 

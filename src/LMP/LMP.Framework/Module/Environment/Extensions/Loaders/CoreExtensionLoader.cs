@@ -1,8 +1,6 @@
 using System;
 using System.Linq;
 using LMP.Module.Environment.Extensions.Models;
-using Orchard.FileSystems.Dependencies;
-using Orchard.Logging;
 
 namespace LMP.Module.Environment.Extensions.Loaders {
     /// <summary>
@@ -15,11 +13,8 @@ namespace LMP.Module.Environment.Extensions.Loaders {
         public CoreExtensionLoader(IDependenciesFolder dependenciesFolder, IAssemblyLoader assemblyLoader)
             : base(dependenciesFolder) {
             _assemblyLoader = assemblyLoader;
-
-            Logger = NullLogger.Instance;
         }
 
-        public ILogger Logger { get; set; }
         public bool Disabled { get; set; }
 
         public override int Order { get { return 10; } }
@@ -46,11 +41,11 @@ namespace LMP.Module.Environment.Extensions.Loaders {
 
             var assembly = _assemblyLoader.Load(CoreAssemblyName);
             if (assembly == null) {
-                Logger.Error("Core modules cannot be activated because assembly '{0}' could not be loaded", CoreAssemblyName);
+                //Logger.Error("Core modules cannot be activated because assembly '{0}' could not be loaded", CoreAssemblyName);
                 return null;
             }
 
-            Logger.Information("Loaded core module \"{0}\": assembly name=\"{1}\"", descriptor.Name, assembly.FullName);
+            //Logger.Information("Loaded core module \"{0}\": assembly name=\"{1}\"", descriptor.Name, assembly.FullName);
 
             return new ExtensionEntry {
                 Descriptor = descriptor,

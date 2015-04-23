@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Orchard.Caching;
+using LMP.Caching;
 
 namespace LMP.Module.Environment.Extensions.Loaders
 {

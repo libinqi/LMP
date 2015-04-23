@@ -3,25 +3,19 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Hosting;
-using Orchard.Caching;
-using Orchard.Logging;
-using Orchard.Services;
+using LMP.Caching;
+using LMP.FileSystems.VirtualPath;
 
-namespace Orchard.FileSystems.VirtualPath {
+namespace LMP.FileSystems.VirtualPath {
 
     public class DefaultVirtualPathMonitor : IVirtualPathMonitor {
         private readonly Thunk _thunk;
         private readonly string _prefix = Guid.NewGuid().ToString("n");
         private readonly IDictionary<string, Weak<Token>> _tokens = new Dictionary<string, Weak<Token>>();
-        private readonly IClock _clock;
 
-        public DefaultVirtualPathMonitor(IClock clock) {
-            _clock = clock;
+        public DefaultVirtualPathMonitor() {
             _thunk = new Thunk(this);
-            Logger = NullLogger.Instance;
         }
-
-        public ILogger Logger { get; set; }
 
         public IVolatileToken WhenPathChanges(string virtualPath) {
             var token = BindToken(virtualPath);
@@ -31,7 +25,9 @@ namespace Orchard.FileSystems.VirtualPath {
             catch (HttpException e) {
                 // This exception happens if trying to monitor a directory or file
                 // inside a directory which doesn't exist
-                Logger.Information(e, "Error monitoring file changes on virtual path '{0}'", virtualPath);
+                //Logger.Information(e, "Error monitoring file changes on virtual path '{0}'", virtualPath);
+
+                throw e;
 
                 //TODO: Return a token monitoring first existing parent directory.
             }
@@ -84,9 +80,9 @@ namespace Orchard.FileSystems.VirtualPath {
             var cacheDependency = HostingEnvironment.VirtualPathProvider.GetCacheDependency(
                 virtualPath,
                 new[] { virtualPath },
-                _clock.UtcNow);
+                DateTime.Now);
 
-            Logger.Debug("Monitoring virtual path \"{0}\"", virtualPath);
+            //Logger.Debug("Monitoring virtual path \"{0}\"", virtualPath);
 
             HostingEnvironment.Cache.Add(
                 key,
@@ -100,7 +96,7 @@ namespace Orchard.FileSystems.VirtualPath {
 
         public void Signal(string key, object value, CacheItemRemovedReason reason) {
             var virtualPath = Convert.ToString(value);
-            Logger.Debug("Virtual path changed ({1}) '{0}'", virtualPath, reason.ToString());
+            //Logger.Debug("Virtual path changed ({1}) '{0}'", virtualPath, reason.ToString());
 
             var token = DetachToken(virtualPath);
             if (token != null)

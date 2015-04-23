@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Orchard.Caching;
 using LMP.Module.Environment.Extensions.Compilers;
 using LMP.Module.Environment.Extensions.Models;
-using Orchard.FileSystems.Dependencies;
-using Orchard.FileSystems.VirtualPath;
-using Orchard.Logging;
-using Orchard.Utility.Extensions;
+using LMP.FileSystems.VirtualPath;
+using LMP.FileSystems.Dependencies;
+using LMP.Caching;
+using LMP.Utils.Extensions;
 
 namespace LMP.Module.Environment.Extensions.Loaders {
     public class DynamicExtensionLoader : ExtensionLoaderBase {
@@ -41,11 +40,8 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             _assemblyProbingFolder = assemblyProbingFolder;
             _projectFileParser = projectFileParser;
             _dependenciesFolder = dependenciesFolder;
-
-            Logger = NullLogger.Instance;
         }
 
-        public ILogger Logger { get; set; }
         public bool Disabled { get; set; }
         public bool DisableMonitoring { get; set; }
 
@@ -71,7 +67,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             string projectPath = GetProjectPath(descriptor);
             if (projectPath != null) {
                 foreach (var path in GetDependencies(projectPath)) {
-                    Logger.Debug("Monitoring virtual path \"{0}\"", path);
+                    //Logger.Debug("Monitoring virtual path \"{0}\"", path);
 
                     var token = _virtualPathMonitor.WhenPathChanges(path);
                     monitor(token);
@@ -88,7 +84,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
 
         public override void ExtensionActivated(ExtensionLoadingContext ctx, ExtensionDescriptor extension) {
             if (_reloadWorkaround.AppDomainRestartNeeded) {
-                Logger.Information("ExtensionActivated: Module \"{0}\" has changed, forcing AppDomain restart", extension.Id);
+                //Logger.Information("ExtensionActivated: Module \"{0}\" has changed, forcing AppDomain restart", extension.Id);
                 ctx.RestartAppDomain = _reloadWorkaround.AppDomainRestartNeeded;
             }
         }
@@ -97,7 +93,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (Disabled)
                 return Enumerable.Empty<ExtensionReferenceProbeEntry>();
 
-            Logger.Information("Probing references for module '{0}'", descriptor.Id);
+            //Logger.Information("Probing references for module '{0}'", descriptor.Id);
 
             string projectPath = GetProjectPath(descriptor);
             if (projectPath == null)
@@ -112,7 +108,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
                 VirtualPath = _virtualPathProvider.GetProjectReferenceVirtualPath(projectPath, r.SimpleName, r.Path)
             });
 
-            Logger.Information("Done probing references for module '{0}'", descriptor.Id);
+            //Logger.Information("Done probing references for module '{0}'", descriptor.Id);
             return result;
         }
 
@@ -133,7 +129,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
 
                 // We need to restart the appDomain if the assembly is loaded
                 if (_hostEnvironment.IsAssemblyLoaded(referenceEntry.Name)) {
-                    Logger.Information("ReferenceActivated: Reference \"{0}\" is activated with newer file and its assembly is loaded, forcing AppDomain restart", referenceEntry.Name);
+                    //Logger.Information("ReferenceActivated: Reference \"{0}\" is activated with newer file and its assembly is loaded, forcing AppDomain restart", referenceEntry.Name);
                     context.RestartAppDomain = true;
                 }
             }
@@ -143,7 +139,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (Disabled)
                 return null;
 
-            Logger.Information("Loading reference '{0}'", reference.Name);
+            //Logger.Information("Loading reference '{0}'", reference.Name);
 
             // DynamicExtensionLoader has 2 types of references: assemblies from module bin directory
             // and .csproj.
@@ -154,7 +150,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
                 result = _buildManager.GetCompiledAssembly(reference.VirtualPath);
             }
 
-            Logger.Information("Done loading reference '{0}'", reference.Name);
+            //Logger.Information("Done loading reference '{0}'", reference.Name);
             return result;
         }
 
@@ -162,7 +158,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (Disabled)
                 return null;
 
-            Logger.Information("Probing for module '{0}'", descriptor.Id);
+            //Logger.Information("Probing for module '{0}'", descriptor.Id);
 
             string projectPath = GetProjectPath(descriptor);
             if (projectPath == null)
@@ -175,7 +171,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
                 VirtualPathDependencies = GetDependencies(projectPath).ToList(),
             };
 
-            Logger.Information("Done probing for module '{0}'", descriptor.Id);
+            //Logger.Information("Done probing for module '{0}'", descriptor.Id);
             return result;
         }
 
@@ -187,13 +183,13 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (projectPath == null)
                 return null;
 
-            Logger.Information("Start loading dynamic extension \"{0}\"", descriptor.Name);
+            //Logger.Information("Start loading dynamic extension \"{0}\"", descriptor.Name);
 
             var assembly = _buildManager.GetCompiledAssembly(projectPath);
             if (assembly == null)
                 return null;
 
-            Logger.Information("Done loading dynamic extension \"{0}\": assembly name=\"{1}\"", descriptor.Name, assembly.FullName);
+            //Logger.Information("Done loading dynamic extension \"{0}\": assembly name=\"{1}\"", descriptor.Name, assembly.FullName);
 
             return new ExtensionEntry {
                 Descriptor = descriptor,

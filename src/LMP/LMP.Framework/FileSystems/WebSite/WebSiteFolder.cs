@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using LMP.Caching;
+using LMP.FileSystems.VirtualPath;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Hosting;
-using Orchard.Caching;
-using Orchard.FileSystems.VirtualPath;
-using Orchard.Logging;
 
-namespace Orchard.FileSystems.WebSite {
+namespace LMP.FileSystems.WebSite {
     public class WebSiteFolder : IWebSiteFolder {
         private readonly IVirtualPathProvider _virtualPathProvider;
         private readonly IVirtualPathMonitor _virtualPathMonitor;
@@ -14,11 +13,7 @@ namespace Orchard.FileSystems.WebSite {
         public WebSiteFolder(IVirtualPathMonitor virtualPathMonitor, IVirtualPathProvider virtualPathProvider) {
             _virtualPathMonitor = virtualPathMonitor;
             _virtualPathProvider = virtualPathProvider;
-
-            Logger = NullLogger.Instance;
         }
-
-        public ILogger Logger { get; set; }
 
         public IEnumerable<string> ListDirectories(string virtualPath) {
             if (!_virtualPathProvider.DirectoryExists(virtualPath)) {

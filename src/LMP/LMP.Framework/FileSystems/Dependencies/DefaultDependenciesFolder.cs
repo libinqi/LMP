@@ -1,13 +1,13 @@
-﻿using System;
+﻿using LMP.Caching;
+using LMP.FileSystems.AppData;
+using LMP.Utils.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Orchard.Caching;
-using Orchard.FileSystems.AppData;
-using Orchard.Localization;
-using Orchard.Utility.Extensions;
 
-namespace Orchard.FileSystems.Dependencies {
+namespace LMP.FileSystems.Dependencies
+{
     public class DefaultDependenciesFolder : IDependenciesFolder {
         private const string BasePath = "Dependencies";
         private const string FileName = "dependencies.xml";
@@ -19,10 +19,8 @@ namespace Orchard.FileSystems.Dependencies {
             _cacheManager = cacheManager;
             _appDataFolder = appDataFolder;
             _writeThroughToken = new InvalidationToken();
-            T = NullLocalizer.Instance;
         }
 
-        public Localizer T { get; set; }
         public bool DisableMonitoring { get; set; }
 
         private string PersistencePath {

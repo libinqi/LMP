@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using LMP.Caching;
+using System.Collections.Generic;
 using System.Linq;
-using Orchard.Caching;
 
-namespace Orchard.FileSystems.Dependencies {
+namespace LMP.FileSystems.Dependencies
+{
     public class DependencyDescriptor {
         public DependencyDescriptor() {
             References = Enumerable.Empty<DependencyReferenceDescriptor>();

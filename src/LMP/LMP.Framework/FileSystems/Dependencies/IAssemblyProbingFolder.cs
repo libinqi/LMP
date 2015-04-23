@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Reflection;
-using Orchard.Caching;
+using LMP.Caching;
 
-namespace Orchard.FileSystems.Dependencies {
+namespace LMP.FileSystems.Dependencies
+{
     /// <summary>
     /// Abstraction over the folder configued in web.config as an additional 
     /// location to load assemblies from. This assumes a local physical file system,

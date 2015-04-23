@@ -2,9 +2,7 @@
 using System.IO;
 using System.Linq;
 using LMP.Module.Environment.Extensions.Models;
-using Orchard.FileSystems.Dependencies;
-using Orchard.FileSystems.VirtualPath;
-using Orchard.Logging;
+using LMP.FileSystems.VirtualPath;
 
 namespace LMP.Module.Environment.Extensions.Loaders {
     /// <summary>
@@ -19,10 +17,8 @@ namespace LMP.Module.Environment.Extensions.Loaders {
 
             _virtualPathProvider = virtualPathProvider;
             _buildManager = buildManager;
-            Logger = NullLogger.Instance;
         }
 
-        public ILogger Logger { get; set; }
         public bool Disabled { get; set; }
 
         public override int Order { get { return 20; } }
@@ -40,7 +36,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (_virtualPathProvider.FileExists(assemblyPath)) {
                 ctx.DeleteActions.Add(
                     () => {
-                        Logger.Information("ExtensionRemoved: Deleting assembly \"{0}\" from bin directory (AppDomain will restart)", moduleName);
+                        //Logger.Information("ExtensionRemoved: Deleting assembly \"{0}\" from bin directory (AppDomain will restart)", moduleName);
                         File.Delete(_virtualPathProvider.MapPath(assemblyPath));
                     });
                 ctx.RestartAppDomain = true;
@@ -74,7 +70,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (assembly == null)
                 return null;
 
-            Logger.Information("Loaded referenced extension \"{0}\": assembly name=\"{1}\"", descriptor.Name, assembly.FullName);
+            //Logger.Information("Loaded referenced extension \"{0}\": assembly name=\"{1}\"", descriptor.Name, assembly.FullName);
 
             return new ExtensionEntry {
                 Descriptor = descriptor,

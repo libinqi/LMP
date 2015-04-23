@@ -1,3 +1,8 @@
+using Abp.Localization;
+using LMP.Caching;
+using LMP.FileSystems.WebSite;
+using LMP.Module.Environment.Extensions.Models;
+using LMP.Utils.Extensions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,12 +37,8 @@ namespace LMP.Module.Environment.Extensions.Folders {
             _cacheManager = cacheManager;
             _webSiteFolder = webSiteFolder;
             _criticalErrorProvider = criticalErrorProvider;
-            Logger = NullLogger.Instance;
-            T = NullLocalizer.Instance;
         }
 
-        public Localizer T { get; set; }
-        public ILogger Logger { get; set; }
         public bool DisableMonitoring { get; set; }
 
         public IEnumerable<ExtensionDescriptor> HarvestExtensions(IEnumerable<string> paths, string extensionType, string manifestName, bool manifestIsOptional) {
@@ -51,7 +52,7 @@ namespace LMP.Module.Environment.Extensions.Folders {
 
             return _cacheManager.Get(key, ctx => {
                 if (!DisableMonitoring) {
-                    Logger.Debug("Monitoring virtual path \"{0}\"", path);
+                    //Logger.Debug("Monitoring virtual path \"{0}\"", path);
                     ctx.Monitor(_webSiteFolder.WhenPathChanges(path));
                 }
 
@@ -60,7 +61,7 @@ namespace LMP.Module.Environment.Extensions.Folders {
         }
 
         private List<ExtensionDescriptor> AvailableExtensionsInFolder(string path, string extensionType, string manifestName, bool manifestIsOptional) {
-            Logger.Information("Start looking for extensions in '{0}'...", path);
+            //Logger.Information("Start looking for extensions in '{0}'...", path);
             var subfolderPaths = _webSiteFolder.ListDirectories(path);
             var localList = new List<ExtensionDescriptor>();
             foreach (var subfolderPath in subfolderPaths) {
@@ -73,12 +74,12 @@ namespace LMP.Module.Environment.Extensions.Folders {
                         continue;
 
                     if (descriptor.Path != null && !descriptor.Path.IsValidUrlSegment()) {
-                        Logger.Error("The module '{0}' could not be loaded because it has an invalid Path ({1}). It was ignored. The Path if specified must be a valid URL segment. The best bet is to stick with letters and numbers with no spaces.",
+                        //Logger.Error("The module '{0}' could not be loaded because it has an invalid Path ({1}). It was ignored. The Path if specified must be a valid URL segment. The best bet is to stick with letters and numbers with no spaces.",
+                        //             extensionId,
+                        //             descriptor.Path);
+                        _criticalErrorProvider.RegisterErrorMessage(new LocalizedString(extensionId, string.Format("The extension '{0}' could not be loaded because it has an invalid Path ({1}). It was ignored. The Path if specified must be a valid URL segment. The best bet is to stick with letters and numbers with no spaces.",
                                      extensionId,
-                                     descriptor.Path);
-                        _criticalErrorProvider.RegisterErrorMessage(T("The extension '{0}' could not be loaded because it has an invalid Path ({1}). It was ignored. The Path if specified must be a valid URL segment. The best bet is to stick with letters and numbers with no spaces.",
-                                     extensionId,
-                                     descriptor.Path));
+                                     descriptor.Path),null));
                         continue;
                     }
 
@@ -92,11 +93,11 @@ namespace LMP.Module.Environment.Extensions.Folders {
                 }
                 catch (Exception ex) {
                     // Ignore invalid module manifests
-                    Logger.Error(ex, "The module '{0}' could not be loaded. It was ignored.", extensionId);
-                    _criticalErrorProvider.RegisterErrorMessage(T("The extension '{0}' manifest could not be loaded. It was ignored.", extensionId));
+                    //Logger.Error(ex, "The module '{0}' could not be loaded. It was ignored.", extensionId);
+                    _criticalErrorProvider.RegisterErrorMessage(new LocalizedString(extensionId, string.Format("The extension '{0}' manifest could not be loaded. It was ignored.", extensionId),null));
                 }
             }
-            Logger.Information("Done looking for extensions in '{0}': {1}", path, string.Join(", ", localList.Select(d => d.Id)));
+            //Logger.Information("Done looking for extensions in '{0}': {1}", path, string.Join(", ", localList.Select(d => d.Id)));
             return localList;
         }
 
@@ -119,7 +120,6 @@ namespace LMP.Module.Environment.Extensions.Folders {
                 BaseTheme = GetValue(manifest, BaseThemeSection),
                 SessionState = GetValue(manifest, SessionStateSection)
             };
-            extensionDescriptor.Features = GetFeaturesForExtension(manifest, extensionDescriptor);
 
             return extensionDescriptor;
         }
@@ -127,7 +127,7 @@ namespace LMP.Module.Environment.Extensions.Folders {
         private ExtensionDescriptor GetExtensionDescriptor(string locationPath, string extensionId, string extensionType, string manifestPath, bool manifestIsOptional) {
             return _cacheManager.Get(manifestPath, context => {
                 if (!DisableMonitoring) {
-                    Logger.Debug("Monitoring virtual path \"{0}\"", manifestPath);
+                    //Logger.Debug("Monitoring virtual path \"{0}\"", manifestPath);
                     context.Monitor(_webSiteFolder.WhenPathChanges(manifestPath));
                 }
 
@@ -220,97 +220,97 @@ namespace LMP.Module.Environment.Extensions.Folders {
             return manifest;
         }
 
-        private static IEnumerable<FeatureDescriptor> GetFeaturesForExtension(IDictionary<string, string> manifest, ExtensionDescriptor extensionDescriptor) {
-            var featureDescriptors = new List<FeatureDescriptor>();
+        //private static IEnumerable<FeatureDescriptor> GetFeaturesForExtension(IDictionary<string, string> manifest, ExtensionDescriptor extensionDescriptor) {
+        //    var featureDescriptors = new List<FeatureDescriptor>();
 
-            // Default feature
-            FeatureDescriptor defaultFeature = new FeatureDescriptor {
-                Id = extensionDescriptor.Id,
-                Name = GetValue(manifest, FeatureNameSection) ?? extensionDescriptor.Name,
-                Priority = GetValue(manifest, PrioritySection) != null ? int.Parse(GetValue(manifest, PrioritySection)) : 0,
-                Description = GetValue(manifest, FeatureDescriptionSection) ?? GetValue(manifest, DescriptionSection) ?? string.Empty,
-                Dependencies = ParseFeatureDependenciesEntry(GetValue(manifest, DependenciesSection)),
-                Extension = extensionDescriptor,
-                Category = GetValue(manifest, CategorySection)
-            };
+        //    // Default feature
+        //    FeatureDescriptor defaultFeature = new FeatureDescriptor {
+        //        Id = extensionDescriptor.Id,
+        //        Name = GetValue(manifest, FeatureNameSection) ?? extensionDescriptor.Name,
+        //        Priority = GetValue(manifest, PrioritySection) != null ? int.Parse(GetValue(manifest, PrioritySection)) : 0,
+        //        Description = GetValue(manifest, FeatureDescriptionSection) ?? GetValue(manifest, DescriptionSection) ?? string.Empty,
+        //        Dependencies = ParseFeatureDependenciesEntry(GetValue(manifest, DependenciesSection)),
+        //        Extension = extensionDescriptor,
+        //        Category = GetValue(manifest, CategorySection)
+        //    };
 
-            featureDescriptors.Add(defaultFeature);
+        //    featureDescriptors.Add(defaultFeature);
 
-            // Remaining features
-            string featuresText = GetValue(manifest, FeaturesSection);
-            if (featuresText != null) {
-                FeatureDescriptor featureDescriptor = null;
-                using (StringReader reader = new StringReader(featuresText)) {
-                    string line;
-                    while ((line = reader.ReadLine()) != null) {
-                        if (IsFeatureDeclaration(line)) {
-                            if (featureDescriptor != null) {
-                                if (!featureDescriptor.Equals(defaultFeature)) {
-                                    featureDescriptors.Add(featureDescriptor);
-                                }
+        //    // Remaining features
+        //    string featuresText = GetValue(manifest, FeaturesSection);
+        //    if (featuresText != null) {
+        //        FeatureDescriptor featureDescriptor = null;
+        //        using (StringReader reader = new StringReader(featuresText)) {
+        //            string line;
+        //            while ((line = reader.ReadLine()) != null) {
+        //                if (IsFeatureDeclaration(line)) {
+        //                    if (featureDescriptor != null) {
+        //                        if (!featureDescriptor.Equals(defaultFeature)) {
+        //                            featureDescriptors.Add(featureDescriptor);
+        //                        }
 
-                                featureDescriptor = null;
-                            }
+        //                        featureDescriptor = null;
+        //                    }
 
-                            string[] featureDeclaration = line.Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
-                            string featureDescriptorId = featureDeclaration[0].Trim();
-                            if (String.Equals(featureDescriptorId, extensionDescriptor.Id, StringComparison.OrdinalIgnoreCase)) {
-                                featureDescriptor = defaultFeature;
-                                featureDescriptor.Name = extensionDescriptor.Name;
-                            }
-                            else {
-                                featureDescriptor = new FeatureDescriptor {
-                                    Id = featureDescriptorId,
-                                    Extension = extensionDescriptor
-                                };
-                            }
-                        }
-                        else if (IsFeatureFieldDeclaration(line)) {
-                            if (featureDescriptor != null) {
-                                string[] featureField = line.Split(new[] { ":" }, 2, StringSplitOptions.None);
-                                int featureFieldLength = featureField.Length;
-                                if (featureFieldLength != 2)
-                                    continue;
-                                for (int i = 0; i < featureFieldLength; i++) {
-                                    featureField[i] = featureField[i].Trim();
-                                }
+        //                    string[] featureDeclaration = line.Split(new[] { ":" }, StringSplitOptions.RemoveEmptyEntries);
+        //                    string featureDescriptorId = featureDeclaration[0].Trim();
+        //                    if (String.Equals(featureDescriptorId, extensionDescriptor.Id, StringComparison.OrdinalIgnoreCase)) {
+        //                        featureDescriptor = defaultFeature;
+        //                        featureDescriptor.Name = extensionDescriptor.Name;
+        //                    }
+        //                    else {
+        //                        featureDescriptor = new FeatureDescriptor {
+        //                            Id = featureDescriptorId,
+        //                            Extension = extensionDescriptor
+        //                        };
+        //                    }
+        //                }
+        //                else if (IsFeatureFieldDeclaration(line)) {
+        //                    if (featureDescriptor != null) {
+        //                        string[] featureField = line.Split(new[] { ":" }, 2, StringSplitOptions.None);
+        //                        int featureFieldLength = featureField.Length;
+        //                        if (featureFieldLength != 2)
+        //                            continue;
+        //                        for (int i = 0; i < featureFieldLength; i++) {
+        //                            featureField[i] = featureField[i].Trim();
+        //                        }
 
-                                switch (featureField[0].ToLowerInvariant()) {
-                                    case NameSection:
-                                        featureDescriptor.Name = featureField[1];
-                                        break;
-                                    case DescriptionSection:
-                                        featureDescriptor.Description = featureField[1];
-                                        break;
-                                    case CategorySection:
-                                        featureDescriptor.Category = featureField[1];
-                                        break;
-                                    case PrioritySection:
-                                        featureDescriptor.Priority = int.Parse(featureField[1]);
-                                        break;
-                                    case DependenciesSection:
-                                        featureDescriptor.Dependencies = ParseFeatureDependenciesEntry(featureField[1]);
-                                        break;
-                                }
-                            }
-                            else {
-                                string message = string.Format("The line {0} in manifest for extension {1} was ignored", line, extensionDescriptor.Id);
-                                throw new ArgumentException(message);
-                            }
-                        }
-                        else {
-                            string message = string.Format("The line {0} in manifest for extension {1} was ignored", line, extensionDescriptor.Id);
-                            throw new ArgumentException(message);
-                        }
-                    }
+        //                        switch (featureField[0].ToLowerInvariant()) {
+        //                            case NameSection:
+        //                                featureDescriptor.Name = featureField[1];
+        //                                break;
+        //                            case DescriptionSection:
+        //                                featureDescriptor.Description = featureField[1];
+        //                                break;
+        //                            case CategorySection:
+        //                                featureDescriptor.Category = featureField[1];
+        //                                break;
+        //                            case PrioritySection:
+        //                                featureDescriptor.Priority = int.Parse(featureField[1]);
+        //                                break;
+        //                            case DependenciesSection:
+        //                                featureDescriptor.Dependencies = ParseFeatureDependenciesEntry(featureField[1]);
+        //                                break;
+        //                        }
+        //                    }
+        //                    else {
+        //                        string message = string.Format("The line {0} in manifest for extension {1} was ignored", line, extensionDescriptor.Id);
+        //                        throw new ArgumentException(message);
+        //                    }
+        //                }
+        //                else {
+        //                    string message = string.Format("The line {0} in manifest for extension {1} was ignored", line, extensionDescriptor.Id);
+        //                    throw new ArgumentException(message);
+        //                }
+        //            }
 
-                    if (featureDescriptor != null && !featureDescriptor.Equals(defaultFeature))
-                        featureDescriptors.Add(featureDescriptor);
-                }
-            }
+        //            if (featureDescriptor != null && !featureDescriptor.Equals(defaultFeature))
+        //                featureDescriptors.Add(featureDescriptor);
+        //        }
+        //    }
 
-            return featureDescriptors;
-        }
+        //    return featureDescriptors;
+        //}
 
         private static bool IsFeatureFieldDeclaration(string line) {
             if (line.StartsWith("\t\t") ||

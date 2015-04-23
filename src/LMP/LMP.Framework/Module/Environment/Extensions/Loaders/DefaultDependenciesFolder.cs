@@ -1,11 +1,10 @@
-﻿using System;
+﻿using LMP.Caching;
+using LMP.FileSystems.AppData;
+using LMP.Utils.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Orchard.Caching;
-using Orchard.FileSystems.AppData;
-using Orchard.Localization;
-using Orchard.Utility.Extensions;
 
 namespace LMP.Module.Environment.Extensions.Loaders
 {
@@ -20,10 +19,8 @@ namespace LMP.Module.Environment.Extensions.Loaders
             _cacheManager = cacheManager;
             _appDataFolder = appDataFolder;
             _writeThroughToken = new InvalidationToken();
-            T = NullLocalizer.Instance;
         }
 
-        public Localizer T { get; set; }
         public bool DisableMonitoring { get; set; }
 
         private string PersistencePath {

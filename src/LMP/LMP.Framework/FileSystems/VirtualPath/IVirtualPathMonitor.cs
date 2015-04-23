@@ -1,6 +1,7 @@
 ﻿using LMP.Caching;
 
-namespace Orchard.FileSystems.VirtualPath {
+namespace LMP.FileSystems.VirtualPath
+{
     /// <summary>
     /// Enable monitoring changes over virtual path
     /// </summary>

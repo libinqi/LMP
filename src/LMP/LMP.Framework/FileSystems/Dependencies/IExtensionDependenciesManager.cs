@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Orchard.Caching;
+using LMP.Caching;
+using LMP.Module.Environment.Extensions.Loaders;
 
-namespace Orchard.FileSystems.Dependencies {
+namespace LMP.FileSystems.Dependencies
+{
     public class ActivatedExtensionDescriptor {
         public string ExtensionId { get; set; }
         public string LoaderName { get; set; }

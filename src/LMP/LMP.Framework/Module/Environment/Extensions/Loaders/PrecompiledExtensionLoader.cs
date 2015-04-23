@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Orchard.Caching;
 using LMP.Module.Environment.Extensions.Models;
-using Orchard.FileSystems.Dependencies;
-using Orchard.FileSystems.VirtualPath;
-using Orchard.Logging;
+using LMP.FileSystems.Dependencies;
+using LMP.FileSystems.VirtualPath;
+using LMP.Caching;
 
 namespace LMP.Module.Environment.Extensions.Loaders {
     /// <summary>
@@ -32,10 +31,8 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             _virtualPathProvider = virtualPathProvider;
             _virtualPathMonitor = virtualPathMonitor;
 
-            Logger = NullLogger.Instance;
         }
 
-        public ILogger Logger { get; set; }
         public bool Disabled { get; set; }
         public bool DisableMonitoring { get; set; }
 
@@ -53,13 +50,13 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (_assemblyProbingFolder.AssemblyExists(dependency.Name)) {
                 ctx.DeleteActions.Add(
                     () => {
-                        Logger.Information("ExtensionRemoved: Deleting assembly \"{0}\" from probing directory", dependency.Name);
+                        //Logger.Information("ExtensionRemoved: Deleting assembly \"{0}\" from probing directory", dependency.Name);
                         _assemblyProbingFolder.DeleteAssembly(dependency.Name);
                     });
 
                 // We need to restart the appDomain if the assembly is loaded
                 if (_hostEnvironment.IsAssemblyLoaded(dependency.Name)) {
-                    Logger.Information("ExtensionRemoved: Module \"{0}\" is removed and its assembly is loaded, forcing AppDomain restart", dependency.Name);
+                    //Logger.Information("ExtensionRemoved: Module \"{0}\" is removed and its assembly is loaded, forcing AppDomain restart", dependency.Name);
                     ctx.RestartAppDomain = true;
                 }
             }
@@ -78,7 +75,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
 
                 // We need to restart the appDomain if the assembly is loaded
                 if (_hostEnvironment.IsAssemblyLoaded(extension.Id)) {
-                    Logger.Information("ExtensionRemoved: Module \"{0}\" is activated with newer file and its assembly is loaded, forcing AppDomain restart", extension.Id);
+                    //Logger.Information("ExtensionRemoved: Module \"{0}\" is activated with newer file and its assembly is loaded, forcing AppDomain restart", extension.Id);
                     ctx.RestartAppDomain = true;
                 }
             }
@@ -88,13 +85,13 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (_assemblyProbingFolder.AssemblyExists(extension.Id)) {
                 ctx.DeleteActions.Add(
                     () => {
-                        Logger.Information("ExtensionDeactivated: Deleting assembly \"{0}\" from probing directory", extension.Id);
+                        //Logger.Information("ExtensionDeactivated: Deleting assembly \"{0}\" from probing directory", extension.Id);
                         _assemblyProbingFolder.DeleteAssembly(extension.Id);
                     });
 
                 // We need to restart the appDomain if the assembly is loaded
                 if (_hostEnvironment.IsAssemblyLoaded(extension.Id)) {
-                    Logger.Information("ExtensionDeactivated: Module \"{0}\" is deactivated and its assembly is loaded, forcing AppDomain restart", extension.Id);
+                    //Logger.Information("ExtensionDeactivated: Module \"{0}\" is deactivated and its assembly is loaded, forcing AppDomain restart", extension.Id);
                     ctx.RestartAppDomain = true;
                 }
             }
@@ -116,7 +113,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
 
                 // We need to restart the appDomain if the assembly is loaded
                 if (_hostEnvironment.IsAssemblyLoaded(referenceEntry.Name)) {
-                    Logger.Information("ReferenceActivated: Reference \"{0}\" is activated with newer file and its assembly is loaded, forcing AppDomain restart", referenceEntry.Name);
+                    //Logger.Information("ReferenceActivated: Reference \"{0}\" is activated with newer file and its assembly is loaded, forcing AppDomain restart", referenceEntry.Name);
                     context.RestartAppDomain = true;
                 }
             }
@@ -132,7 +129,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             // If the assembly exists, monitor it
             string assemblyPath = GetAssemblyPath(descriptor);
             if (assemblyPath != null) {
-                Logger.Debug("Monitoring virtual path \"{0}\"", assemblyPath);
+                //Logger.Debug("Monitoring virtual path \"{0}\"", assemblyPath);
                 monitor(_virtualPathMonitor.WhenPathChanges(assemblyPath));
                 return;
             }
@@ -142,7 +139,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             // detect that as a change of configuration.
             var assemblyDirectory = _virtualPathProvider.Combine(descriptor.Location, descriptor.Id, "bin");
             if (_virtualPathProvider.DirectoryExists(assemblyDirectory)) {
-                Logger.Debug("Monitoring virtual path \"{0}\"", assemblyDirectory);
+                //Logger.Debug("Monitoring virtual path \"{0}\"", assemblyDirectory);
                 monitor(_virtualPathMonitor.WhenPathChanges(assemblyDirectory));
             }
         }
@@ -151,7 +148,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (Disabled)
                 return Enumerable.Empty<ExtensionReferenceProbeEntry>();
 
-            Logger.Information("Probing references for module '{0}'", descriptor.Id);
+            //Logger.Information("Probing references for module '{0}'", descriptor.Id);
 
             var assemblyPath = GetAssemblyPath(descriptor);
             if (assemblyPath == null)
@@ -169,7 +166,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
                 } )
                 .ToList();
 
-            Logger.Information("Done probing references for module '{0}'", descriptor.Id);
+            //Logger.Information("Done probing references for module '{0}'", descriptor.Id);
             return result;
         }
 
@@ -179,7 +176,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             // which will have a different identity (i.e. name) from the dynamic module.
             bool result = references.All(r => r.Loader.GetType() != typeof(DynamicExtensionLoader));
             if (!result) {
-                Logger.Information("Extension \"{0}\" will not be loaded as pre-compiled extension because one or more referenced extension is dynamically compiled", extension.Id);
+                //Logger.Information("Extension \"{0}\" will not be loaded as pre-compiled extension because one or more referenced extension is dynamically compiled", extension.Id);
             }
             return result;
         }
@@ -188,7 +185,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (Disabled)
                 return null;
 
-            Logger.Information("Probing for module '{0}'", descriptor.Id);
+            //Logger.Information("Probing for module '{0}'", descriptor.Id);
 
             var assemblyPath = GetAssemblyPath(descriptor);
             if (assemblyPath == null)
@@ -201,7 +198,7 @@ namespace LMP.Module.Environment.Extensions.Loaders {
                 VirtualPathDependencies = new[] { assemblyPath },
             };
 
-            Logger.Information("Done probing for module '{0}'", descriptor.Id);
+            //Logger.Information("Done probing for module '{0}'", descriptor.Id);
             return result;
         }
 
@@ -209,11 +206,11 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (Disabled)
                 return null;
 
-            Logger.Information("Loading reference '{0}'", reference.Name);
+            //Logger.Information("Loading reference '{0}'", reference.Name);
 
             var result = _assemblyProbingFolder.LoadAssembly(reference.Name);
 
-            Logger.Information("Done loading reference '{0}'", reference.Name);
+            //Logger.Information("Done loading reference '{0}'", reference.Name);
             return result;
         }
 
@@ -221,13 +218,13 @@ namespace LMP.Module.Environment.Extensions.Loaders {
             if (Disabled)
                 return null;
 
-            Logger.Information("Start loading pre-compiled extension \"{0}\"", descriptor.Name);
+            //Logger.Information("Start loading pre-compiled extension \"{0}\"", descriptor.Name);
 
             var assembly = _assemblyProbingFolder.LoadAssembly(descriptor.Id);
             if (assembly == null)
                 return null;
 
-            Logger.Information("Done loading pre-compiled extension \"{0}\": assembly name=\"{1}\"", descriptor.Name, assembly.FullName);
+            //Logger.Information("Done loading pre-compiled extension \"{0}\": assembly name=\"{1}\"", descriptor.Name, assembly.FullName);
 
             return new ExtensionEntry {
                 Descriptor = descriptor,

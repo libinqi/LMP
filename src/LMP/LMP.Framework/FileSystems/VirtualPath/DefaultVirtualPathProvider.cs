@@ -4,15 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
-using Orchard.Logging;
 
-namespace Orchard.FileSystems.VirtualPath {
+namespace LMP.FileSystems.VirtualPath
+{
     public class DefaultVirtualPathProvider : IVirtualPathProvider {
         public DefaultVirtualPathProvider() {
-            Logger = NullLogger.Instance;
         }
-
-        public ILogger Logger { get; set; }
 
         public virtual string GetDirectoryName(string virtualPath) {
             return Path.GetDirectoryName(virtualPath).Replace(Path.DirectorySeparatorChar, '/');
@@ -54,14 +51,14 @@ namespace Orchard.FileSystems.VirtualPath {
                 //   VirtualPath    : ~/Bar/../Blah/Blah2
                 //   Result         : /Blah/Blah2  <= that is not an app relative path!
                 if (!result.StartsWith("~/")) {
-                    Logger.Information("Path '{0}' cannot be made app relative: Path returned ('{1}') is not app relative.", virtualPath, result);
+                    //Logger.Information("Path '{0}' cannot be made app relative: Path returned ('{1}') is not app relative.", virtualPath, result);
                     return null;
                 }
                 return result;
             }
             catch (Exception e) {
                 // The initial path might have been invalid (e.g. path indicates a path outside the application root)
-                Logger.Information(e, "Path '{0}' cannot be made app relative", virtualPath);
+                //Logger.Information(e, "Path '{0}' cannot be made app relative", virtualPath);
                 return null;
             }
         }
@@ -88,7 +85,7 @@ namespace Orchard.FileSystems.VirtualPath {
                     foreach (var term in terms) {
                         if (term == "..") {
                             if (depth == 0) {
-                                Logger.Information("Path '{0}' cannot be made app relative: Too many '..'", virtualPath);
+                                //Logger.Information("Path '{0}' cannot be made app relative: Too many '..'", virtualPath);
                                 return true;
                             }
                             depth--;
@@ -157,7 +154,7 @@ namespace Orchard.FileSystems.VirtualPath {
                 return FileExists(virtualPath);
             }
             catch (Exception e) {
-                Logger.Information(e, "File '{0}' can not be checked for existence. Assuming doesn't exist.", virtualPath);
+                //Logger.Information(e, "File '{0}' can not be checked for existence. Assuming doesn't exist.", virtualPath);
                 return false;
             }
         }

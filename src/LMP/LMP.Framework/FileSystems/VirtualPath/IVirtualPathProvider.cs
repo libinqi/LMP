@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Orchard.FileSystems.VirtualPath {
+namespace LMP.FileSystems.VirtualPath {
     public interface IVirtualPathProvider : IVolatileProvider {
         string Combine(params string[] paths);
         string ToAppRelative(string virtualPath);

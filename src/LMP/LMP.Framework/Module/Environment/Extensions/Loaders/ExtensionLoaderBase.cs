@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Orchard.Caching;
 using LMP.Module.Environment.Extensions.Models;
-using Orchard.FileSystems.Dependencies;
+using LMP.Caching;
 
 namespace LMP.Module.Environment.Extensions.Loaders {
     public abstract class ExtensionLoaderBase : IExtensionLoader {

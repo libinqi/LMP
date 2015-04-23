@@ -30,7 +30,5 @@ namespace LMP.Module.Environment.Extensions.Models {
         public string Zones { get; set; }
         public string BaseTheme { get; set; }
         public string SessionState { get; set; }
-
-        public IEnumerable<FeatureDescriptor> Features { get; set; }
     }
 }

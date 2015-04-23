@@ -6,8 +6,8 @@ namespace LMP.Module.Environment.Extensions.Folders {
         private readonly IEnumerable<string> _paths;
         private readonly IExtensionHarvester _extensionHarvester;
 
-        public ModuleFolders(IEnumerable<string> paths, IExtensionHarvester extensionHarvester)  {
-            _paths = paths;
+        public ModuleFolders(IExtensionHarvester extensionHarvester)  {
+            _paths = new[] { "~/LMP.Modules" };
             _extensionHarvester = extensionHarvester;
         }
 
