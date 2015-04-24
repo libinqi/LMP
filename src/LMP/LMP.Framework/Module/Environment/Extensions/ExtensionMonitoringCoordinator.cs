@@ -43,7 +43,7 @@ namespace LMP.Module.Environment.Extensions
             //Logger.Information("Start monitoring extension files...");
             //// Monitor add/remove of any module/theme
             //Logger.Debug("Monitoring virtual path \"{0}\"", "~/Modules");
-            monitor(_virtualPathMonitor.WhenPathChanges("~/LMP.Modules"));
+            monitor(_virtualPathMonitor.WhenPathChanges("~/Modules"));
             //Logger.Debug("Monitoring virtual path \"{0}\"", "~/Themes");
             //monitor(_virtualPathMonitor.WhenPathChanges("~/Themes"));
 

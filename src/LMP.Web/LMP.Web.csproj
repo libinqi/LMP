@@ -1602,18 +1602,6 @@
     <TypeScriptCompile Include="bower_components\angular-ui-router\api\angular-ui-router.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LMP.Modules\LMP.QuestionSystem\LMP.QuestionSystem.csproj">
-      <Project>{49ab7fa6-a2f7-4f93-a83c-1e34746533c4}</Project>
-      <Name>LMP.QuestionSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LMP.Modules\LMP.TaskSystem\LMP.TaskSystem.csproj">
-      <Project>{196d2675-975d-40e1-851e-d638ffec6f72}</Project>
-      <Name>LMP.TaskSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LMP.Modules\LMP.Users\LMP.Users.csproj">
-      <Project>{a9cab995-6034-421c-bcab-62c8efb0ff72}</Project>
-      <Name>LMP.Users</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LMP\LMP.Core\LMP.Core.csproj">
       <Project>{9efc858c-0b5d-4daa-a33e-8a1322d77fdd}</Project>
       <Name>LMP.Core</Name>
@@ -1621,6 +1609,18 @@
     <ProjectReference Include="..\LMP\LMP.Framework\LMP.Framework.csproj">
       <Project>{78a45ca7-2b30-4f1b-ae7d-099edc50b44e}</Project>
       <Name>LMP.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="Modules\LMP.QuestionSystem\LMP.QuestionSystem.csproj">
+      <Project>{49ab7fa6-a2f7-4f93-a83c-1e34746533c4}</Project>
+      <Name>LMP.QuestionSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Modules\LMP.TaskSystem\LMP.TaskSystem.csproj">
+      <Project>{196d2675-975d-40e1-851e-d638ffec6f72}</Project>
+      <Name>LMP.TaskSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Modules\LMP.Users\LMP.Users.csproj">
+      <Project>{a9cab995-6034-421c-bcab-62c8efb0ff72}</Project>
+      <Name>LMP.Users</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

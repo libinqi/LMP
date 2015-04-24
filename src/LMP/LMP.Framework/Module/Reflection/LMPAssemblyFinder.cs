@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.IO;
+using LMP.FileSystems.AppData;
+using LMP.FileSystems.VirtualPath;
 
 namespace LMP.Module.Reflection
 {
@@ -13,30 +15,42 @@ namespace LMP.Module.Reflection
     /// </summary>
     internal class LMPAssemblyFinder : IAssemblyFinder
     {
-        private const string module_path = "~/LMP.Modules";
-        /// <summary>
-        /// Gets Singleton instance of <see cref="LMPAssemblyFinder"/>.
-        /// </summary>
-        public static LMPAssemblyFinder Instance { get { return SingletonInstance; } }
-        private static readonly LMPAssemblyFinder SingletonInstance = new LMPAssemblyFinder();
+        private const string module_path = "Dependencies";
+        private readonly IVirtualPathProvider _virtualPathProvider;
+        private readonly IAppDataFolderRoot _appDataFolderRoot;
+        List<Assembly> moduleAssemblies;
 
         /// <summary>
         /// Private constructor to disable instancing.
         /// </summary>
-        private LMPAssemblyFinder()
+        private LMPAssemblyFinder(IAppDataFolderRoot appDataFolderRoot, IVirtualPathProvider virtualPathProvider)
         {
-
+            _appDataFolderRoot = appDataFolderRoot;
+            _virtualPathProvider = virtualPathProvider;
+            moduleAssemblies = new List<Assembly>();
         }
 
         public List<Assembly> GetAllAssemblies()
         {
-            return AppDomain.CurrentDomain.GetAssemblies().ToList();
+            moduleAssemblies.AddRange(AppDomain.CurrentDomain.GetAssemblies().ToList());
+            GetModuleAssemblies();
+            return moduleAssemblies;
         }
 
-        public List<Assembly> GetModuleAssemblies()
+        public void GetModuleAssemblies()
         {
-            string moduleAssembliesDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, module_path);
-            return null;
+            string moduleAssembliesDirectory = Path.Combine(_appDataFolderRoot.RootPath, module_path);
+            var moduleStrArray = _virtualPathProvider.ListFiles(module_path).Where(s => StringComparer.OrdinalIgnoreCase.Equals(Path.GetExtension(s), ".dll")).ToList();
+            Assembly assemblie = null;
+
+            foreach (var item in moduleStrArray)
+            {
+                assemblie = Assembly.LoadFile(item);
+                if (assemblie != null)
+                {
+                    moduleAssemblies.Add(Assembly.LoadFile(item));
+                }
+            }
         }
     }
 }

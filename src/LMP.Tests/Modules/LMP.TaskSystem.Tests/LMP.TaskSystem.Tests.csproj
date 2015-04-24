@@ -145,7 +145,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\LMP.Modules\LMP.TaskSystem\LMP.TaskSystem.csproj">
+    <ProjectReference Include="..\..\..\LMP.Web\Modules\LMP.TaskSystem\LMP.TaskSystem.csproj">
       <Project>{196d2675-975d-40e1-851e-d638ffec6f72}</Project>
       <Name>LMP.TaskSystem</Name>
     </ProjectReference>

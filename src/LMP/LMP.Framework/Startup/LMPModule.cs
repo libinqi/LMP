@@ -13,6 +13,8 @@ using LMP.FileSystems.WebSite;
 using LMP.Caching;
 using Castle.MicroKernel.Registration;
 using LMP.Web.Mvc;
+using Abp.Reflection;
+using LMP.Module.Reflection;
 
 namespace LMP.Module
 {
@@ -28,6 +30,7 @@ namespace LMP.Module
 
         public override void PreInitialize()
         {
+            IocManager.Register<IAssemblyFinder, LMPAssemblyFinder>();
             IocManager.Register<IUserManagementConfig, UserManagementConfig>();
             IocManager.Register<IRoleManagementConfig, RoleManagementConfig>();
             IocManager.Register<ILMPModuleConfig, LMPModuleConfig>();
@@ -58,7 +61,7 @@ namespace LMP.Module
             IocManager.Register<ICriticalErrorProvider, DefaultCriticalErrorProvider>();
 
             IocManager.IocContainer.Register(
-                Component.For<IExtensionFolders, ModuleFolders>().ImplementedBy<ModuleFolders>().LifestyleSingleton().DependsOn(Dependency.OnValue("paths", new[] { "~/LMP.Modules" })),
+                Component.For<IExtensionFolders, ModuleFolders>().ImplementedBy<ModuleFolders>().LifestyleSingleton().DependsOn(Dependency.OnValue("paths", new[] { "~/Modules" })),
                 Component.For<ICacheManager, DefaultCacheManager>().ImplementedBy<DefaultCacheManager>().LifestyleSingleton().DependsOn(Dependency.OnValue("component", typeof(string)))
             );
 
@@ -83,6 +86,7 @@ namespace LMP.Module
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+
 
             var extensionLoaderCoordinator = IocManager.IocContainer.Resolve<IExtensionLoaderCoordinator>();
             extensionLoaderCoordinator.SetupExtensions();
