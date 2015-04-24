@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -121,12 +121,10 @@
     <Compile Include="Caching\IVolatileProvider.cs" />
     <Compile Include="FileSystems\Dependencies\DefaultAssemblyProbingFolder.cs" />
     <Compile Include="FileSystems\Dependencies\DefaultExtensionDependenciesManager.cs" />
-    <Compile Include="FileSystems\Dependencies\DynamicModuleVirtualPathProvider.cs" />
     <Compile Include="FileSystems\Dependencies\IAssemblyProbingFolder.cs" />
     <Compile Include="FileSystems\Dependencies\IExtensionDependenciesManager.cs" />
     <Compile Include="FileSystems\VirtualPath\DefaultVirtualPathMonitor.cs" />
     <Compile Include="FileSystems\VirtualPath\DefaultVirtualPathProvider.cs" />
-    <Compile Include="FileSystems\VirtualPath\ICustomVirtualPathProvider.cs" />
     <Compile Include="FileSystems\VirtualPath\IVirtualPathMonitor.cs" />
     <Compile Include="FileSystems\VirtualPath\IVirtualPathProvider.cs" />
     <Compile Include="FileSystems\WebSite\IWebSiteFolder.cs" />
@@ -139,6 +137,7 @@
     <Compile Include="Module\Configuration\RoleManagementConfig.cs" />
     <Compile Include="Module\Configuration\StaticRoleDefinition.cs" />
     <Compile Include="Module\Configuration\UserManagementConfig.cs" />
+    <Compile Include="Module\Environment\DefaultHostEnvironment.cs" />
     <Compile Include="Module\Environment\Extensions\ExtensionLoaderCoordinator.cs" />
     <Compile Include="Module\Environment\Extensions\ExtensionManager.cs" />
     <Compile Include="Module\Environment\Extensions\ExtensionMonitoringCoordinator.cs" />
@@ -154,14 +153,11 @@
     <Compile Include="Module\Environment\Extensions\Folders\ModuleFolders.cs" />
     <Compile Include="Module\Environment\Extensions\Helpers\PathHelpers.cs" />
     <Compile Include="Module\Environment\Extensions\ICriticalErrorProvider.cs" />
-    <Compile Include="Module\Environment\Extensions\Loaders\CoreExtensionLoader.cs" />
     <Compile Include="Module\Environment\Extensions\Loaders\DefaultDependenciesFolder.cs" />
-    <Compile Include="Module\Environment\Extensions\Loaders\DynamicExtensionLoader.cs" />
     <Compile Include="Module\Environment\Extensions\Loaders\ExtensionLoaderBase.cs" />
     <Compile Include="Module\Environment\Extensions\Loaders\IDependenciesFolder.cs" />
     <Compile Include="Module\Environment\Extensions\Loaders\IExtensionLoader.cs" />
     <Compile Include="Module\Environment\Extensions\Loaders\PrecompiledExtensionLoader.cs" />
-    <Compile Include="Module\Environment\Extensions\Loaders\ReferencedExtensionLoader.cs" />
     <Compile Include="Module\Environment\Extensions\Models\DefaultExtensionTypes.cs" />
     <Compile Include="Module\Environment\Extensions\Models\ExtensionDescriptor.cs" />
     <Compile Include="Module\Environment\HostEnvironment.cs" />
@@ -182,11 +178,13 @@
     <Compile Include="Runtime\Session\LMPSession.cs" />
     <Compile Include="Utils\Extensions\DependencyOrderingUtility.cs" />
     <Compile Include="Utils\Extensions\Hash.cs" />
+    <Compile Include="Utils\Extensions\HttpRequestExtensions.cs" />
     <Compile Include="Utils\Extensions\ReadOnlyCollectionExtensions.cs" />
     <Compile Include="Utils\Extensions\StringExtensions.cs" />
     <Compile Include="Utils\Extensions\VirtualPathProviderExtensions.cs" />
     <Compile Include="Utils\Helpers\RandomHelper.cs" />
     <Compile Include="Validation\PathValidation.cs" />
+    <Compile Include="Web\Mvc\IHttpContextAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

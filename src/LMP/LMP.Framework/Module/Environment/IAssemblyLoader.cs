@@ -10,11 +10,11 @@ namespace LMP.Module.Environment {
     }
 
     public class DefaultAssemblyLoader : IAssemblyLoader {
-        private readonly IEnumerable<IAssemblyNameResolver> _assemblyNameResolvers;
+        private readonly IAssemblyNameResolver _assemblyNameResolver;
         private readonly ConcurrentDictionary<string, Assembly> _loadedAssemblies = new ConcurrentDictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
 
-        public DefaultAssemblyLoader(IEnumerable<IAssemblyNameResolver> assemblyNameResolvers) {
-            _assemblyNameResolvers = assemblyNameResolvers.OrderBy(l => l.Order);
+        public DefaultAssemblyLoader(IAssemblyNameResolver assemblyNameResolver) {
+            _assemblyNameResolver = assemblyNameResolver;
         }
 
         public Assembly Load(string assemblyName) {
@@ -43,7 +43,7 @@ namespace LMP.Module.Environment {
                 return result;
 
             // Try resolving the short name to a full name
-            var resolvedName = _assemblyNameResolvers.Select(r => r.Resolve(shortName)).FirstOrDefault(f => f != null);
+            var resolvedName = _assemblyNameResolver.Resolve(shortName);
             if (resolvedName != null) {
                 return Assembly.Load(resolvedName);
             }

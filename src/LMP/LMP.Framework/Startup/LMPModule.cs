@@ -12,6 +12,7 @@ using LMP.FileSystems.VirtualPath;
 using LMP.FileSystems.WebSite;
 using LMP.Caching;
 using Castle.MicroKernel.Registration;
+using LMP.Web.Mvc;
 
 namespace LMP.Module
 {
@@ -39,13 +40,13 @@ namespace LMP.Module
             IocManager.Register<IParallelCacheContext, DefaultParallelCacheContext>();
             //IocManager.Register<IVolatileProvider, DefaultVirtualPathProvider>();
             IocManager.Register<IVolatileToken, LMP.Caching.Signals.Token>();
-
+            IocManager.Register<IHttpContextAccessor, HttpContextAccessor>();
 
             IocManager.Register<IAppDataFolder, AppDataFolder>();
             IocManager.Register<IAppDataFolderRoot, AppDataFolderRoot>();
             IocManager.Register<IAssemblyProbingFolder, DefaultAssemblyProbingFolder>();
             IocManager.Register<IExtensionDependenciesManager, DefaultExtensionDependenciesManager>();
-            IocManager.Register<ICustomVirtualPathProvider, DynamicModuleVirtualPathProvider>();
+            //IocManager.Register<ICustomVirtualPathProvider, DynamicModuleVirtualPathProvider>();
             IocManager.Register<IVirtualPathMonitor, DefaultVirtualPathMonitor>();
             IocManager.Register<IVirtualPathProvider, DefaultVirtualPathProvider>();
             IocManager.Register<IWebSiteFolder, WebSiteFolder>();
@@ -57,21 +58,21 @@ namespace LMP.Module
             IocManager.Register<ICriticalErrorProvider, DefaultCriticalErrorProvider>();
 
             IocManager.IocContainer.Register(
-                //Component.For<IExtensionFolders, ModuleFolders>().ImplementedBy<ModuleFolders>().LifestyleSingleton().DependsOn(Dependency.OnValue("paths", "~/LMP.Modules")),
+                Component.For<IExtensionFolders, ModuleFolders>().ImplementedBy<ModuleFolders>().LifestyleSingleton().DependsOn(Dependency.OnValue("paths", new[] { "~/LMP.Modules" })),
                 Component.For<ICacheManager, DefaultCacheManager>().ImplementedBy<DefaultCacheManager>().LifestyleSingleton().DependsOn(Dependency.OnValue("component", typeof(string)))
             );
 
-            IocManager.Register<IExtensionFolders, ModuleFolders>();
+            //IocManager.Register<IExtensionFolders, ModuleFolders>();
 
-            IocManager.Register<IExtensionLoader, CoreExtensionLoader>();
-            IocManager.Register<IExtensionLoader, ReferencedExtensionLoader>();
+            //IocManager.Register<IExtensionLoader, CoreExtensionLoader>();
+            //IocManager.Register<IExtensionLoader, ReferencedExtensionLoader>();
             IocManager.Register<IExtensionLoader, PrecompiledExtensionLoader>();
-            IocManager.Register<IExtensionLoader, DynamicExtensionLoader>();
+            //IocManager.Register<IExtensionLoader, DynamicExtensionLoader>();
 
             IocManager.Register<IAssemblyLoader, DefaultAssemblyLoader>();
             IocManager.Register<IAssemblyNameResolver, AppDomainAssemblyNameResolver>();
             IocManager.Register<IBuildManager, DefaultBuildManager>();
-            IocManager.Register<IHostEnvironment, HostEnvironment>();
+            IocManager.Register<IHostEnvironment, DefaultHostEnvironment>();
             IocManager.Register<IExtensionManager, ExtensionManager>();
 
             IocManager.Register<IExtensionLoaderCoordinator, ExtensionLoaderCoordinator>();
@@ -82,6 +83,19 @@ namespace LMP.Module
         public override void Initialize()
         {
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
+
+            var extensionLoaderCoordinator = IocManager.IocContainer.Resolve<IExtensionLoaderCoordinator>();
+            extensionLoaderCoordinator.SetupExtensions();
+
+            var cacheManager = IocManager.IocContainer.Resolve<ICacheManager>();
+            var extensionMonitoringCoordinator = IocManager.IocContainer.Resolve<IExtensionMonitoringCoordinator>();
+
+            cacheManager.Get("LMPHost_Extensions",
+                        ctx =>
+                        {
+                            extensionMonitoringCoordinator.MonitorExtensions(ctx.Monitor);
+                            return "";
+                        });
         }
     }
 }

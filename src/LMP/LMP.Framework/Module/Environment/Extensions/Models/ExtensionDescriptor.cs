@@ -3,7 +3,7 @@
 namespace LMP.Module.Environment.Extensions.Models {
     public class ExtensionDescriptor {
         /// <summary>
-        /// Virtual path base, "~/Themes", "~/Modules", or "~/Core"
+        /// Virtual path base,"~/Modules"
         /// </summary>
         public string Location { get; set; }
 
@@ -22,13 +22,7 @@ namespace LMP.Module.Environment.Extensions.Models {
         public string Path { get; set; }
         public string Description { get; set; }
         public string Version { get; set; }
-        public string OrchardVersion { get; set; }
         public string Author { get; set; }
-        public string WebSite { get; set; }
-        public string Tags { get; set; }
-        public string AntiForgery { get; set; }
-        public string Zones { get; set; }
-        public string BaseTheme { get; set; }
         public string SessionState { get; set; }
     }
 }

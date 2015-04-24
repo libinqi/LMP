@@ -11,23 +11,27 @@ namespace LMP.Module.Environment.Extensions
 {
     public class ExtensionManager : IExtensionManager {
         private readonly IEnumerable<IExtensionFolders> _folders;
+        private readonly IExtensionFolders _folder;
         private readonly IAsyncTokenProvider _asyncTokenProvider;
         private readonly ICacheManager _cacheManager;
         private readonly IParallelCacheContext _parallelCacheContext;
         private readonly IEnumerable<IExtensionLoader> _loaders;
+        private readonly IExtensionLoader _loader;
 
         public ExtensionManager(
-            IEnumerable<IExtensionFolders> folders,
-            IEnumerable<IExtensionLoader> loaders,
+            IExtensionFolders folder,
+            IExtensionLoader loader,
             ICacheManager cacheManager,
             IParallelCacheContext parallelCacheContext,
             IAsyncTokenProvider asyncTokenProvider) {
 
-            _folders = folders;
+            _folder = folder;
+            _folders = new List<IExtensionFolders>() { _folder };
             _asyncTokenProvider = asyncTokenProvider;
             _cacheManager = cacheManager;
             _parallelCacheContext = parallelCacheContext;
-            _loaders = loaders.OrderBy(x => x.Order).ToArray();
+            _loader = loader;
+            _loaders = new List<IExtensionLoader>() { _loader };
         }
 
         // This method does not load extension types, simply parses extension manifests from 

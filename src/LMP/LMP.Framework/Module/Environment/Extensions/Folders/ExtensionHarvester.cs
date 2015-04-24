@@ -14,19 +14,8 @@ namespace LMP.Module.Environment.Extensions.Folders {
         private const string PathSection = "path";
         private const string DescriptionSection = "description";
         private const string VersionSection = "version";
-        private const string OrchardVersionSection = "orchardversion";
         private const string AuthorSection = "author";
-        private const string WebsiteSection = "website";
-        private const string TagsSection = "tags";
-        private const string AntiForgerySection = "antiforgery";
-        private const string ZonesSection = "zones";
-        private const string BaseThemeSection = "basetheme";
-        private const string DependenciesSection = "dependencies";
         private const string CategorySection = "category";
-        private const string FeatureDescriptionSection = "featuredescription";
-        private const string FeatureNameSection = "featurename";
-        private const string PrioritySection = "priority";
-        private const string FeaturesSection = "features";
         private const string SessionStateSection = "sessionstate";
 
         private readonly ICacheManager _cacheManager;
@@ -111,13 +100,7 @@ namespace LMP.Module.Environment.Extensions.Folders {
                 Path = GetValue(manifest, PathSection),
                 Description = GetValue(manifest, DescriptionSection),
                 Version = GetValue(manifest, VersionSection),
-                OrchardVersion = GetValue(manifest, OrchardVersionSection),
                 Author = GetValue(manifest, AuthorSection),
-                WebSite = GetValue(manifest, WebsiteSection),
-                Tags = GetValue(manifest, TagsSection),
-                AntiForgery = GetValue(manifest, AntiForgerySection),
-                Zones = GetValue(manifest, ZonesSection),
-                BaseTheme = GetValue(manifest, BaseThemeSection),
                 SessionState = GetValue(manifest, SessionStateSection)
             };
 
@@ -171,47 +154,14 @@ namespace LMP.Module.Environment.Extensions.Folders {
                         case VersionSection:
                             manifest.Add(VersionSection, field[1]);
                             break;
-                        case OrchardVersionSection:
-                            manifest.Add(OrchardVersionSection, field[1]);
-                            break;
                         case AuthorSection:
                             manifest.Add(AuthorSection, field[1]);
-                            break;
-                        case WebsiteSection:
-                            manifest.Add(WebsiteSection, field[1]);
-                            break;
-                        case TagsSection:
-                            manifest.Add(TagsSection, field[1]);
-                            break;
-                        case AntiForgerySection:
-                            manifest.Add(AntiForgerySection, field[1]);
-                            break;
-                        case ZonesSection:
-                            manifest.Add(ZonesSection, field[1]);
-                            break;
-                        case BaseThemeSection:
-                            manifest.Add(BaseThemeSection, field[1]);
-                            break;
-                        case DependenciesSection:
-                            manifest.Add(DependenciesSection, field[1]);
-                            break;
+                            break;                     
                         case CategorySection:
                             manifest.Add(CategorySection, field[1]);
                             break;
-                        case FeatureDescriptionSection:
-                            manifest.Add(FeatureDescriptionSection, field[1]);
-                            break;
-                        case FeatureNameSection:
-                            manifest.Add(FeatureNameSection, field[1]);
-                            break;
-                        case PrioritySection:
-                            manifest.Add(PrioritySection, field[1]);
-                            break;
                         case SessionStateSection:
                             manifest.Add(SessionStateSection, field[1]);
-                            break;
-                        case FeaturesSection:
-                            manifest.Add(FeaturesSection, reader.ReadToEnd());
                             break;
                     }
                 }

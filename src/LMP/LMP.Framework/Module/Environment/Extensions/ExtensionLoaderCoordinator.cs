@@ -18,6 +18,7 @@ namespace LMP.Module.Environment.Extensions
         private readonly IExtensionManager _extensionManager;
         private readonly IVirtualPathProvider _virtualPathProvider;
         private readonly IEnumerable<IExtensionLoader> _loaders;
+        private readonly IExtensionLoader _loader;
         private readonly IHostEnvironment _hostEnvironment;
         private readonly IParallelCacheContext _parallelCacheContext;
         private readonly IBuildManager _buildManager;
@@ -27,7 +28,7 @@ namespace LMP.Module.Environment.Extensions
             IExtensionDependenciesManager extensionDependenciesManager,
             IExtensionManager extensionManager,
             IVirtualPathProvider virtualPathProvider,
-            IEnumerable<IExtensionLoader> loaders,
+            IExtensionLoader loader,
             IHostEnvironment hostEnvironment,
             IParallelCacheContext parallelCacheContext,
             IBuildManager buildManager) {
@@ -36,7 +37,8 @@ namespace LMP.Module.Environment.Extensions
             _extensionDependenciesManager = extensionDependenciesManager;
             _extensionManager = extensionManager;
             _virtualPathProvider = virtualPathProvider;
-            _loaders = loaders.OrderBy(l => l.Order);
+            _loader = loader;
+            _loaders = new List<IExtensionLoader>() { _loader };
             _hostEnvironment = hostEnvironment;
             _parallelCacheContext = parallelCacheContext;
             _buildManager = buildManager;
@@ -170,7 +172,7 @@ namespace LMP.Module.Environment.Extensions
         private ExtensionLoadingContext CreateLoadingContext() {
             var availableExtensions = _extensionManager
                 .AvailableExtensions()
-                .Where(d => DefaultExtensionTypes.IsModule(d.ExtensionType) || DefaultExtensionTypes.IsTheme(d.ExtensionType))
+                .Where(d => DefaultExtensionTypes.IsModule(d.ExtensionType))
                 .OrderBy(d => d.Id)
                 .ToList();
 

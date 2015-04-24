@@ -13,17 +13,19 @@ namespace LMP.Module.Environment.Extensions
         private readonly IAsyncTokenProvider _asyncTokenProvider;
         private readonly IExtensionManager _extensionManager;
         private readonly IEnumerable<IExtensionLoader> _loaders;
+        private readonly IExtensionLoader _loader;
 
         public ExtensionMonitoringCoordinator(
             IVirtualPathMonitor virtualPathMonitor,
             IAsyncTokenProvider asyncTokenProvider,
             IExtensionManager extensionManager,
-            IEnumerable<IExtensionLoader> loaders) {
+            IExtensionLoader loader) {
 
             _virtualPathMonitor = virtualPathMonitor;
             _asyncTokenProvider = asyncTokenProvider;
             _extensionManager = extensionManager;
-            _loaders = loaders;
+            _loader = loader;
+            _loaders = new List<IExtensionLoader>() { _loader };
         }
 
         public bool Disabled { get; set; }
@@ -41,12 +43,12 @@ namespace LMP.Module.Environment.Extensions
             //Logger.Information("Start monitoring extension files...");
             //// Monitor add/remove of any module/theme
             //Logger.Debug("Monitoring virtual path \"{0}\"", "~/Modules");
-            monitor(_virtualPathMonitor.WhenPathChanges("~/Modules"));
+            monitor(_virtualPathMonitor.WhenPathChanges("~/LMP.Modules"));
             //Logger.Debug("Monitoring virtual path \"{0}\"", "~/Themes");
             //monitor(_virtualPathMonitor.WhenPathChanges("~/Themes"));
 
             // Give loaders a chance to monitor any additional changes
-            var extensions = _extensionManager.AvailableExtensions().Where(d => DefaultExtensionTypes.IsModule(d.ExtensionType) || DefaultExtensionTypes.IsTheme(d.ExtensionType)).ToList();
+            var extensions = _extensionManager.AvailableExtensions().Where(d => DefaultExtensionTypes.IsModule(d.ExtensionType)).ToList();
             foreach (var extension in extensions) {
                 foreach (var loader in _loaders) {
                     loader.Monitor(extension, monitor);
