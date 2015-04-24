@@ -1,4 +1,0 @@
-﻿Name: LMP.TaskSystem
-Author: libinqi
-Version: 1.0
-Description: LMP.TaskSystem

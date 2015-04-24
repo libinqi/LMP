@@ -1,4 +1,0 @@
-﻿Name: LMP.Users
-Author: libinqi
-Version: 1.0
-Description: LMP.Users

@@ -1,4 +1,0 @@
-﻿Name: LMP.QuestionSystem
-Author: libinqi
-Version: 1.0
-Description: LMP.QuestionSystem
