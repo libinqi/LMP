@@ -323,8 +323,8 @@ namespace LMP.Module.Environment.Extensions
             }
 
             // Skip references from "~/bin"
-            if (_buildManager.HasReferencedAssembly(referenceName))
-                return;
+            //if (_buildManager.HasReferencedAssembly(referenceName))
+            //    return;
 
             // Binary references
             var references = context.ReferencesByName.ContainsKey(referenceName) ?

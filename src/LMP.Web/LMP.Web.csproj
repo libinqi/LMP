@@ -542,16 +542,6 @@
     <Content Include="js\main.js" />
     <Content Include="Localization\AbpWeb\AbpWeb.xml" />
     <Content Include="Localization\AbpWeb\AbpWeb.zh-cn.xml" />
-    <Content Include="Localization\Users\Users.xml" />
-    <Content Include="Localization\Users\Users.zh-cn.xml" />
-    <Content Include="Localization\QuestionSystem\QuestionSystem.zh-cn.xml" />
-    <Content Include="Localization\QuestionSystem\QuestionSystem.xml" />
-    <Content Include="Localization\TaskSystem\TaskSystem.zh-cn.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Localization\TaskSystem\TaskSystem.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -1572,7 +1562,6 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="App_Start\LMPNavigationProvider.cs" />
     <Compile Include="Controllers\LMPControllerBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1609,18 +1598,6 @@
     <ProjectReference Include="..\LMP\LMP.Framework\LMP.Framework.csproj">
       <Project>{78a45ca7-2b30-4f1b-ae7d-099edc50b44e}</Project>
       <Name>LMP.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="Modules\LMP.QuestionSystem\LMP.QuestionSystem.csproj">
-      <Project>{49ab7fa6-a2f7-4f93-a83c-1e34746533c4}</Project>
-      <Name>LMP.QuestionSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="Modules\LMP.TaskSystem\LMP.TaskSystem.csproj">
-      <Project>{196d2675-975d-40e1-851e-d638ffec6f72}</Project>
-      <Name>LMP.TaskSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="Modules\LMP.Users\LMP.Users.csproj">
-      <Project>{a9cab995-6034-421c-bcab-62c8efb0ff72}</Project>
-      <Name>LMP.Users</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

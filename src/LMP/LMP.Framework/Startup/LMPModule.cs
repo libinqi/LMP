@@ -30,56 +30,56 @@ namespace LMP.Module
 
         public override void PreInitialize()
         {
-            IocManager.Register<IAssemblyFinder, LMPAssemblyFinder>();
+            //IocManager.Register<IAssemblyFinder, LMPAssemblyFinder>();
             IocManager.Register<IUserManagementConfig, UserManagementConfig>();
             IocManager.Register<IRoleManagementConfig, RoleManagementConfig>();
             IocManager.Register<ILMPModuleConfig, LMPModuleConfig>();
 
 
-            IocManager.Register<IAsyncTokenProvider, DefaultAsyncTokenProvider>();
-            IocManager.Register<ICacheContextAccessor, DefaultCacheContextAccessor>();
-            IocManager.Register<ICacheHolder, DefaultCacheHolder>();
-            //IocManager.Register<ICacheManager, DefaultCacheManager>();
-            IocManager.Register<IParallelCacheContext, DefaultParallelCacheContext>();
-            //IocManager.Register<IVolatileProvider, DefaultVirtualPathProvider>();
-            IocManager.Register<IVolatileToken, LMP.Caching.Signals.Token>();
-            IocManager.Register<IHttpContextAccessor, HttpContextAccessor>();
+            //IocManager.Register<IAsyncTokenProvider, DefaultAsyncTokenProvider>();
+            //IocManager.Register<ICacheContextAccessor, DefaultCacheContextAccessor>();
+            //IocManager.Register<ICacheHolder, DefaultCacheHolder>();
+            ////IocManager.Register<ICacheManager, DefaultCacheManager>();
+            //IocManager.Register<IParallelCacheContext, DefaultParallelCacheContext>();
+            ////IocManager.Register<IVolatileProvider, DefaultVirtualPathProvider>();
+            //IocManager.Register<IVolatileToken, LMP.Caching.Signals.Token>();
+            //IocManager.Register<IHttpContextAccessor, HttpContextAccessor>();
 
-            IocManager.Register<IAppDataFolder, AppDataFolder>();
-            IocManager.Register<IAppDataFolderRoot, AppDataFolderRoot>();
-            IocManager.Register<IAssemblyProbingFolder, DefaultAssemblyProbingFolder>();
-            IocManager.Register<IExtensionDependenciesManager, DefaultExtensionDependenciesManager>();
+            //IocManager.Register<IAppDataFolder, AppDataFolder>();
+            //IocManager.Register<IAppDataFolderRoot, AppDataFolderRoot>();
+            //IocManager.Register<IAssemblyProbingFolder, DefaultAssemblyProbingFolder>();
+            //IocManager.Register<IExtensionDependenciesManager, DefaultExtensionDependenciesManager>();
             //IocManager.Register<ICustomVirtualPathProvider, DynamicModuleVirtualPathProvider>();
-            IocManager.Register<IVirtualPathMonitor, DefaultVirtualPathMonitor>();
-            IocManager.Register<IVirtualPathProvider, DefaultVirtualPathProvider>();
-            IocManager.Register<IWebSiteFolder, WebSiteFolder>();
+            //IocManager.Register<IVirtualPathMonitor, DefaultVirtualPathMonitor>();
+            //IocManager.Register<IVirtualPathProvider, DefaultVirtualPathProvider>();
+            //IocManager.Register<IWebSiteFolder, WebSiteFolder>();
 
 
-            IocManager.Register<IProjectFileParser, DefaultProjectFileParser>();
-            IocManager.Register<IExtensionHarvester, ExtensionHarvester>();
-            IocManager.Register<IDependenciesFolder, DefaultDependenciesFolder>();
-            IocManager.Register<ICriticalErrorProvider, DefaultCriticalErrorProvider>();
+            //IocManager.Register<IProjectFileParser, DefaultProjectFileParser>();
+            //IocManager.Register<IExtensionHarvester, ExtensionHarvester>();
+            //IocManager.Register<IDependenciesFolder, DefaultDependenciesFolder>();
+            //IocManager.Register<ICriticalErrorProvider, DefaultCriticalErrorProvider>();
 
-            IocManager.IocContainer.Register(
-                Component.For<IExtensionFolders, ModuleFolders>().ImplementedBy<ModuleFolders>().LifestyleSingleton().DependsOn(Dependency.OnValue("paths", new[] { "~/Modules" })),
-                Component.For<ICacheManager, DefaultCacheManager>().ImplementedBy<DefaultCacheManager>().LifestyleSingleton().DependsOn(Dependency.OnValue("component", typeof(string)))
-            );
+            //IocManager.IocContainer.Register(
+            //    Component.For<IExtensionFolders, ModuleFolders>().ImplementedBy<ModuleFolders>().LifestyleSingleton().DependsOn(Dependency.OnValue("paths", new[] { "~/Modules" })),
+            //    Component.For<ICacheManager, DefaultCacheManager>().ImplementedBy<DefaultCacheManager>().LifestyleSingleton().DependsOn(Dependency.OnValue("component", typeof(string)))
+            //);
 
-            //IocManager.Register<IExtensionFolders, ModuleFolders>();
+            ////IocManager.Register<IExtensionFolders, ModuleFolders>();
 
-            //IocManager.Register<IExtensionLoader, CoreExtensionLoader>();
-            //IocManager.Register<IExtensionLoader, ReferencedExtensionLoader>();
-            IocManager.Register<IExtensionLoader, PrecompiledExtensionLoader>();
+            ////IocManager.Register<IExtensionLoader, CoreExtensionLoader>();
+            ////IocManager.Register<IExtensionLoader, ReferencedExtensionLoader>();
+            //IocManager.Register<IExtensionLoader, PrecompiledExtensionLoader>();
             //IocManager.Register<IExtensionLoader, DynamicExtensionLoader>();
 
-            IocManager.Register<IAssemblyLoader, DefaultAssemblyLoader>();
-            IocManager.Register<IAssemblyNameResolver, AppDomainAssemblyNameResolver>();
-            IocManager.Register<IBuildManager, DefaultBuildManager>();
-            IocManager.Register<IHostEnvironment, DefaultHostEnvironment>();
-            IocManager.Register<IExtensionManager, ExtensionManager>();
+            //IocManager.Register<IAssemblyLoader, DefaultAssemblyLoader>();
+            //IocManager.Register<IAssemblyNameResolver, AppDomainAssemblyNameResolver>();
+            //IocManager.Register<IBuildManager, DefaultBuildManager>();
+            //IocManager.Register<IHostEnvironment, DefaultHostEnvironment>();
+            //IocManager.Register<IExtensionManager, ExtensionManager>();
 
-            IocManager.Register<IExtensionLoaderCoordinator, ExtensionLoaderCoordinator>();
-            IocManager.Register<IExtensionMonitoringCoordinator, ExtensionMonitoringCoordinator>();
+            //IocManager.Register<IExtensionLoaderCoordinator, ExtensionLoaderCoordinator>();
+            //IocManager.Register<IExtensionMonitoringCoordinator, ExtensionMonitoringCoordinator>();
 
         }
 
@@ -88,18 +88,18 @@ namespace LMP.Module
             IocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
 
 
-            var extensionLoaderCoordinator = IocManager.IocContainer.Resolve<IExtensionLoaderCoordinator>();
-            extensionLoaderCoordinator.SetupExtensions();
+            //var extensionLoaderCoordinator = IocManager.IocContainer.Resolve<IExtensionLoaderCoordinator>();
+            //extensionLoaderCoordinator.SetupExtensions();
 
-            var cacheManager = IocManager.IocContainer.Resolve<ICacheManager>();
-            var extensionMonitoringCoordinator = IocManager.IocContainer.Resolve<IExtensionMonitoringCoordinator>();
+            //var cacheManager = IocManager.IocContainer.Resolve<ICacheManager>();
+            //var extensionMonitoringCoordinator = IocManager.IocContainer.Resolve<IExtensionMonitoringCoordinator>();
 
-            cacheManager.Get("LMPHost_Extensions",
-                        ctx =>
-                        {
-                            extensionMonitoringCoordinator.MonitorExtensions(ctx.Monitor);
-                            return "";
-                        });
+            //cacheManager.Get("LMPHost_Extensions",
+            //            ctx =>
+            //            {
+            //                extensionMonitoringCoordinator.MonitorExtensions(ctx.Monitor);
+            //                return "";
+            //            });
         }
     }
 }
