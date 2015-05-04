@@ -32,22 +32,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.5.11.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Abp, Version=0.5.13.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Abp.0.5.11.0\lib\net451\Abp.dll</HintPath>
+      <HintPath>..\..\..\packages\Abp.0.5.13.1\lib\net451\Abp.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.AutoMapper">
-      <HintPath>..\..\packages\Abp.AutoMapper.0.5.11.0\lib\net451\Abp.AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Abp.EntityFramework, Version=0.5.11.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Abp.AutoMapper, Version=0.5.13.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Abp.EntityFramework.0.5.11.0\lib\net451\Abp.EntityFramework.dll</HintPath>
+      <HintPath>..\..\..\packages\Abp.AutoMapper.0.5.13.0\lib\net451\Abp.AutoMapper.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.Web">
-      <HintPath>..\..\packages\Abp.Web.0.5.11.0\lib\net451\Abp.Web.dll</HintPath>
+    <Reference Include="Abp.EntityFramework, Version=0.5.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Abp.EntityFramework.0.5.13.0\lib\net451\Abp.EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.Web.Api">
-      <HintPath>..\..\packages\Abp.Web.Api.0.5.11.0\lib\net451\Abp.Web.Api.dll</HintPath>
+    <Reference Include="Abp.Web, Version=0.5.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Abp.Web.0.5.13.0\lib\net451\Abp.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Abp.Web.Api, Version=0.5.13.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\Abp.Web.Api.0.5.13.0\lib\net451\Abp.Web.Api.dll</HintPath>
     </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>

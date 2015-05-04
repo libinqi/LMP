@@ -43,25 +43,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Abp, Version=0.5.11.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Abp, Version=0.5.13.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Abp.0.5.11.0\lib\net451\Abp.dll</HintPath>
+      <HintPath>..\packages\Abp.0.5.13.1\lib\net451\Abp.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.EntityFramework, Version=0.5.11.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Abp.EntityFramework, Version=0.5.13.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Abp.EntityFramework.0.5.11.0\lib\net451\Abp.EntityFramework.dll</HintPath>
+      <HintPath>..\packages\Abp.EntityFramework.0.5.13.0\lib\net451\Abp.EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.Web, Version=0.5.11.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Abp.Web, Version=0.5.13.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Abp.Web.0.5.11.0\lib\net451\Abp.Web.dll</HintPath>
+      <HintPath>..\packages\Abp.Web.0.5.13.0\lib\net451\Abp.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.Web.Api, Version=0.5.11.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Abp.Web.Api, Version=0.5.13.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Abp.Web.Api.0.5.11.0\lib\net451\Abp.Web.Api.dll</HintPath>
+      <HintPath>..\packages\Abp.Web.Api.0.5.13.0\lib\net451\Abp.Web.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Abp.Web.Mvc, Version=0.5.11.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Abp.Web.Mvc, Version=0.5.13.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Abp.Web.Mvc.0.5.11.0\lib\net451\Abp.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Abp.Web.Mvc.0.5.13.0\lib\net451\Abp.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
@@ -540,6 +540,7 @@
     <Content Include="Icon.png" />
     <Content Include="js\Account\login.js" />
     <Content Include="js\main.js" />
+    <Content Include="Localization\AbpWeb\AbpWeb.tr.xml" />
     <Content Include="Localization\AbpWeb\AbpWeb.xml" />
     <Content Include="Localization\AbpWeb\AbpWeb.zh-cn.xml" />
     <Content Include="Scripts\angular-animate.js" />
@@ -581,6 +582,8 @@
     <Content Include="Scripts\angular-ui\ui-utils-ieshiv.min.js" />
     <Content Include="Scripts\angular-ui\ui-utils.js" />
     <Content Include="Scripts\angular-ui\ui-utils.min.js" />
+    <Content Include="Abp\Framework\styles\abp.less" />
+    <Content Include="Abp\Framework\styles\abp.css.map" />
     <None Include="Scripts\angular.intellisense.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -605,8 +608,6 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Abp\Framework\styles\abp.less" />
-    <Content Include="Abp\Framework\styles\abp.css.map" />
     <Content Include="App\Main\main.less" />
     <Content Include="App\Main\views\layout\header.cshtml" />
     <Content Include="App\Main\views\layout\layout.cshtml" />
