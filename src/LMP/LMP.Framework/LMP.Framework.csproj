@@ -37,7 +37,7 @@
       <HintPath>..\..\packages\Abp.0.5.13.1\lib\net451\Abp.dll</HintPath>
     </Reference>
     <Reference Include="Abp.Web">
-      <HintPath>..\..\packages\Abp.Web.0.5.11.0\lib\net451\Abp.Web.dll</HintPath>
+      <HintPath>..\..\packages\Abp.Web.0.5.13.0\lib\net451\Abp.Web.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
@@ -72,7 +72,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Visual Studio 2013\Projects\LMP\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
