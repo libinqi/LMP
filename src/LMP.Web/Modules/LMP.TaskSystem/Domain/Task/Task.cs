@@ -8,8 +8,13 @@ using LMP.Core.Security.Users;
 namespace LMP.TaskSystem.Domain
 {
     [Table("Tasks")]
-    public class Task : CreationAuditedEntity<int, User>
+    public class Task : CreationAuditedEntity<long, User>
     {
+        [ForeignKey("AssignedUserId")]
+        public virtual User AssignedUser { get; set; }
+
+        public virtual long? AssignedUserId { get; set; }
+
         /// <summary>
         /// Describes the task.
         /// </summary>

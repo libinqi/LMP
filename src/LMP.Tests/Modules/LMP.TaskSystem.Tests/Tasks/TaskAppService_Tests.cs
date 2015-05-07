@@ -47,7 +47,7 @@ namespace LMP.TaskSystem.Tests
                 new CreateTaskInput
                 {
                     Description = "my test task 2",
-                    CreatorUserId = thomasMore.Id
+                    AssignedUserId = thomasMore.Id
                 });
 
             //Check results

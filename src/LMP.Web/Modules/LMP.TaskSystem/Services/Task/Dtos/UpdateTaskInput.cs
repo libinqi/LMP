@@ -12,7 +12,7 @@ namespace LMP.TaskSystem.Services.Dtos
     /// Implements <see cref="IInputDto"/>, thus ABP applies standard input process (like automatic validation) for it. 
     /// Implements <see cref="ICustomValidate"/> for additional custom validation.
     /// </summary>
-    public class UpdateTaskInput : CreationAuditedEntityDto, ICustomValidate
+    public class UpdateTaskInput : CreationAuditedEntityDto<long>, ICustomValidate
     {
         public TaskState? State { get; set; }
 

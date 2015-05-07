@@ -21,14 +21,14 @@ namespace LMP.TaskSystem.Repositories
     /// <summary>
     /// Implements <see cref="ITaskRepository"/> for EntityFramework ORM.
     /// </summary>
-    public class TaskRepository :TaskSystemRepositoryBase<Task, int>, ITaskRepository
+    public class TaskRepository : TaskSystemRepositoryBase<Task, long>, ITaskRepository
     {
         public TaskRepository(IDbContextProvider<TaskSystemDbContext> dbContextProvider)
             : base(dbContextProvider)
         {
         }
 
-        public List<Task> GetAllWithPeople(long? assignedPersonId, TaskState? state)
+        public List<Task> GetAllWithPeople(long? assignedUserId, TaskState? state)
         {
             //In repository methods, we do not deal with create/dispose DB connections, DbContexes and transactions. ABP handles it.
 
@@ -38,9 +38,9 @@ namespace LMP.TaskSystem.Repositories
 
             //Add some Where conditions...
 
-            if (assignedPersonId.HasValue)
+            if (assignedUserId.HasValue)
             {
-                query = query.Where(task => task.CreatorUserId == assignedPersonId.Value);
+                query = query.Where(task => task.AssignedUserId == assignedUserId.Value);
             }
 
             if (state.HasValue)
@@ -50,7 +50,7 @@ namespace LMP.TaskSystem.Repositories
 
             return query
                 .OrderByDescending(task => task.CreationTime)
-                .Include(task => task.CreatorUser) //Include assigned person in a single query
+                .Include(task => task.AssignedUser) //Include assigned person in a single query
                 .ToList();
         }
     }

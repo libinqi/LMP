@@ -44,15 +44,17 @@ namespace LMP.TaskSystem.Services
 
         public GetTasksOutput GetTasks(GetTasksInput input)
         {
-            var users = _userRepository.GetAll().ToList();
+            //var users = _userRepository.GetAll().ToList();
             //Called specific GetAllWithPeople method of task repository.
-            var tasks = _taskRepository.GetAllWithPeople(input.CreatorUserId, input.State);
+            var tasks = _taskRepository.GetAllWithPeople(input.AssignedUserId, input.State);
 
             //Used AutoMapper to automatically convert List<Task> to List<TaskDto>.
-            return new GetTasksOutput
-            {
-                Tasks = tasks.MapTo<List<TaskDto>>()
-            };
+            var tasksOutput = new GetTasksOutput
+             {
+                 Tasks = tasks.MapTo<List<TaskDto>>()
+             };
+
+            return tasksOutput;
         }
 
         public void UpdateTask(UpdateTaskInput input)
@@ -88,10 +90,10 @@ namespace LMP.TaskSystem.Services
             //Creating a new Task entity with given input's properties
             var task = new Task { Description = input.Description };
 
-            //if (input.CreatorUserId.HasValue)
-            //{
-            //    task.CreatorUser = _userRepository.Load(input.CreatorUserId.Value);
-            //}
+            if (input.AssignedUserId.HasValue)
+            {
+                task.AssignedUserId = input.AssignedUserId.Value;
+            }
 
             //Saving entity with standard Insert method of repositories.
             _taskRepository.Insert(task);

@@ -8,7 +8,7 @@ namespace LMP.TaskSystem.Domain
     /// 
     /// Extends <see cref="IRepository{TEntity, TPrimaryKey}"/> to inherit base repository functionality. 
     /// </summary>
-    public interface ITaskRepository : IRepository<Task, int>
+    public interface ITaskRepository : IRepository<Task, long>
     {
         /// <summary>
         /// Gets all tasks with <see cref="Task.AssignedPerson"/> is retrived (Include for EntityFramework, Fetch for NHibernate)
@@ -17,6 +17,6 @@ namespace LMP.TaskSystem.Domain
         /// <param name="assignedPersonId">Optional assigned person filter. If it's null, not filtered.</param>
         /// <param name="state">Optional state filter. If it's null, not filtered.</param>
         /// <returns>List of found tasks</returns>
-        List<Task> GetAllWithPeople(long? assignedPersonId, TaskState? state);
+        List<Task> GetAllWithPeople(long? assignedUserId, TaskState? state);
     }
 }

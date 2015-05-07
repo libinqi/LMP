@@ -67,6 +67,7 @@ namespace LMP.TaskSystem.Migrations.Data
                 context.SaveChanges();
 
                 task.CreatorUserId = UserForDefaultTenant.Id;
+                task.AssignedUserId = UserForDefaultTenant.Id;
                 context.SaveChanges();
             }
 
@@ -101,6 +102,7 @@ namespace LMP.TaskSystem.Migrations.Data
                 context.SaveChanges();
 
                 task.CreatorUserId = UserForDefaultTenant.Id;
+                task.AssignedUserId = UserForDefaultTenant.Id;
                 context.SaveChanges();
             }
 
@@ -135,6 +137,7 @@ namespace LMP.TaskSystem.Migrations.Data
                 context.SaveChanges();
 
                 task.CreatorUserId = UserForDefaultTenant.Id;
+                task.AssignedUserId = UserForDefaultTenant.Id;
                 context.SaveChanges();
             }
         

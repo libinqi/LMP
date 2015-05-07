@@ -6,7 +6,7 @@
         </div>
         <div class="form-group">
             <label for="TaskAssignedPerson">{{vm.localize('AssignTo')}}</label>
-            <select id="TaskAssignedPerson" class="form-control" ng-model="vm.task.creatorUserId" ng-options="person.id as person.userName for person in vm.people">
+            <select id="TaskAssignedPerson" class="form-control" ng-model="vm.task.assignedUserId" ng-options="person.id as person.userName for person in vm.people">
                 <option value="">{{vm.localize('SelectPerson')}}</option>
             </select>
         </div>

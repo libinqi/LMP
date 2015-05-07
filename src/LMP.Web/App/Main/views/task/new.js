@@ -9,7 +9,7 @@
 
             vm.task = {
                 description: '',
-                creatorUserId: null
+                assignedUserId: null
             };
 
             vm.localize = abp.localization.getSource('TaskSystem');
