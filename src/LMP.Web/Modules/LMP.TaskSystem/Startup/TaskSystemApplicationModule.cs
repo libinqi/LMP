@@ -10,10 +10,12 @@ using LMP.TaskSystem.Navigation;
 using Abp.Localization.Sources;
 using Abp.Localization.Sources.Xml;
 using System.Web;
+using LMP.Module;
 
 namespace LMP.TaskSystem
 {
     //[DependsOn(typeof(AbpWebApiModule), typeof(LMPCoreModule), typeof(AbpAutoMapperModule), typeof(AbpEntityFrameworkModule))] //We declare depended modules explicitly
+    [DependsOn(typeof(LMPModule), typeof(LMPCoreModule), typeof(AbpAutoMapperModule), typeof(AbpEntityFrameworkModule))]
     public class TaskSystemApplicationModule : AbpModule
     {
         public override void PreInitialize()
@@ -28,14 +30,14 @@ namespace LMP.TaskSystem
 
             Configuration.Navigation.Providers.Add<TaskSystemMenu>();
 
-            Configuration.Localization.Sources.Add(
-            new DictionaryBasedLocalizationSource(
-                "TaskSystem",
-                new XmlFileLocalizationDictionaryProvider(
-                    HttpContext.Current.Server.MapPath("~/Modules/LMP.TaskSystem/Localization/TaskSystem")
-                    )
-                )
-            );
+            //Configuration.Localization.Sources.Add(
+            //new DictionaryBasedLocalizationSource(
+            //    "TaskSystem",
+            //    new XmlFileLocalizationDictionaryProvider(
+            //        HttpContext.Current.Server.MapPath("~/Modules/LMP.TaskSystem/Localization/TaskSystem")
+            //        )
+            //    )
+            //);
 
             DynamicApiControllerBuilder
             .ForAll<IApplicationService>(Assembly.GetExecutingAssembly(), "tasksystem")

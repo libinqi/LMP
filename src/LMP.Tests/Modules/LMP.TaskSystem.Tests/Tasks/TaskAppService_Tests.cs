@@ -23,11 +23,11 @@ namespace LMP.TaskSystem.Tests
         public void Should_Get_Tasks()
         {
             //Run SUT
-            var output = _taskAppService.GetTasks(new GetTasksInput { State = TaskState.Completed });
+            var output = _taskAppService.GetTasks(new GetTasksInput { State = TaskState.Active });
 
             //Checking results
-            output.Tasks.Count.ShouldBe(2);
-            output.Tasks.All(t => t.State == (byte)TaskState.Completed).ShouldBe(true);
+            output.Tasks.Count.ShouldBe(3);
+            output.Tasks.All(t => t.State == (byte)TaskState.Active).ShouldBe(true);
         }
 
         [Fact]
@@ -54,10 +54,10 @@ namespace LMP.TaskSystem.Tests
             UsingDbContext(context =>
             {
                 context.Tasks.Count().ShouldBe(initialTaskCount + 2);
-                context.Tasks.FirstOrDefault(t => t.CreatorUserId == null && t.Description == "my test task 1").ShouldNotBe(null);
+                context.Tasks.FirstOrDefault(t => t.AssignedUserId == null && t.Description == "my test task 1").ShouldNotBe(null);
                 var task2 = context.Tasks.FirstOrDefault(t => t.Description == "my test task 2");
                 task2.ShouldNotBe(null);
-                task2.CreatorUserId.ShouldBe(thomasMore.Id);
+                task2.AssignedUserId.ShouldBe(thomasMore.Id);
             });
         }
 
@@ -65,7 +65,7 @@ namespace LMP.TaskSystem.Tests
         public void Should_Not_Create_Task_Without_Description()
         {
             //Description is not set
-            Assert.Throws<AbpValidationException>(() => _taskAppService.CreateTask(new CreateTaskInput()));
+            Assert.Throws<AbpValidationException>(() =>_taskAppService.CreateTask(new CreateTaskInput()));
         }
 
         //Trying to assign a task of Isaac Asimov to Thomas More
@@ -85,12 +85,12 @@ namespace LMP.TaskSystem.Tests
             _taskAppService.UpdateTask(
                 new UpdateTaskInput
                 {
-                    Id = targetTask.Id,
-                    CreatorUserId = dengweifan.Id
+                    TaskId = targetTask.Id,
+                    AssignedUserId = dengweifan.Id
                 });
 
             //Check result
-            taskRepository.Get(targetTask.Id).CreatorUserId.ShouldBe(dengweifan.Id);
+            taskRepository.Get(targetTask.Id).AssignedUserId.ShouldBe(dengweifan.Id);
         }
 
         private User GetUser(string name)

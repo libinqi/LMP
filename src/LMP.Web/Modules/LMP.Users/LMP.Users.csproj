@@ -147,9 +147,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201505051337239_InitialCreate.cs" />
-    <Compile Include="Migrations\201505051337239_InitialCreate.Designer.cs">
-      <DependentUpon>201505051337239_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201505080209052_InitialCreate.cs" />
+    <Compile Include="Migrations\201505080209052_InitialCreate.Designer.cs">
+      <DependentUpon>201505080209052_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Data\InitialDataBuilder.cs" />
@@ -187,8 +187,8 @@
     <Content Include="Module.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505051337239_InitialCreate.resx">
-      <DependentUpon>201505051337239_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201505080209052_InitialCreate.resx">
+      <DependentUpon>201505080209052_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

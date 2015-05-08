@@ -7,6 +7,7 @@ using Castle.MicroKernel.Registration;
 using LMP.TaskSystem.Tests.InitialData;
 using LMP.TaskSystem;
 using LMP.TaskSystem.EntityFramework;
+using LMP.TaskSystem.Migrations.Data;
 
 namespace LMP.TaskSystem.Tests
 {
@@ -28,7 +29,7 @@ namespace LMP.TaskSystem.Tests
                 );
 
             //Seed initial data
-            UsingDbContext(context => new TaskSystemInitialDataBuilder().Build(context));
+            UsingDbContext(context => new InitialDataBuilder().Build(context));
         }
 
         protected override void AddModules(ITypeList<AbpModule> modules)

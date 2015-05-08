@@ -80,10 +80,10 @@ namespace LMP.TaskSystem.Migrations.Data
                     new User
                     {
                         TenantId = defaultTenant.Id,
-                        UserName = "deweifan",
-                        Name = "deweifan",
+                        UserName = "dengweifan",
+                        Name = "dengweifan",
                         Surname = "µËì¿·²",
-                        EmailAddress = "deweifan@jt56.org",
+                        EmailAddress = "dengweifan@jt56.org",
                         IsEmailConfirmed = true,
                         Password = "AM4OLBpptxBYmM79lGOX9egzZk3vIQU3d/gFCJzaBjAPXzYIK3tQ2N7X4fcrHtElTw==" //123qwe
                     });

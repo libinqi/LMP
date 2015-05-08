@@ -12,14 +12,19 @@ namespace LMP.TaskSystem.Services.Dtos
     /// Implements <see cref="IInputDto"/>, thus ABP applies standard input process (like automatic validation) for it. 
     /// Implements <see cref="ICustomValidate"/> for additional custom validation.
     /// </summary>
-    public class UpdateTaskInput : CreationAuditedEntityDto<long>, ICustomValidate
+    public class UpdateTaskInput : IInputDto, ICustomValidate
     {
+        [Range(1, long.MaxValue)] //Data annotation attributes work as expected.
+        public long TaskId { get; set; }
+
+        public long? AssignedUserId { get; set; }
+
         public TaskState? State { get; set; }
 
         //Custom validation method. It's called by ABP after data annotation validations.
         public void AddValidationErrors(List<ValidationResult> results)
         {
-            if (CreatorUserId == null && State == null)
+            if (AssignedUserId == null && State == null)
             {
                 results.Add(new ValidationResult("Both of AssignedPersonId and State can not be null in order to update a Task!", new[] { "AssignedPersonId", "State" }));
             }
@@ -27,7 +32,7 @@ namespace LMP.TaskSystem.Services.Dtos
 
         public override string ToString()
         {
-            return string.Format("[UpdateTaskInput > TaskId = {0}, AssignedPersonId = {1}, State = {2}]", Id, CreatorUserId, State);
+            return string.Format("[UpdateTaskInput > TaskId = {0}, AssignedPersonId = {1}, State = {2}]", TaskId, AssignedUserId, State);
         }
     }
 }

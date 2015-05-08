@@ -63,7 +63,7 @@ namespace LMP.TaskSystem.Services
             Logger.Info("Updating a task for input: " + input);
 
             //Retrieving a task entity with given id using standard Get method of repositories.
-            var task = _taskRepository.Get(input.Id);
+            var task = _taskRepository.Get(input.TaskId);
 
             //Updating changed properties of the retrieved task entity.
 
@@ -72,9 +72,9 @@ namespace LMP.TaskSystem.Services
                 task.State = input.State.Value;
             }
 
-            if (input.CreatorUserId.HasValue)
+            if (input.AssignedUserId.HasValue)
             {
-                task.CreatorUser = _userRepository.Load(input.CreatorUserId.Value);
+                task.AssignedUser = _userRepository.Load(input.AssignedUserId.Value);
             }
 
             //We even do not call Update method of the repository.
